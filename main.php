@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include 'parser.php'; //Parsing Logic ?>
 <html>
     <head>
         <title>LoL player data</title>
@@ -10,9 +10,6 @@
         <link rel="stylesheet" href="custom.css">
         <!-- jQuery -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
-        
-<?php include 'parser.php'; //Parsing Logic ?>
-        
     </head>
 
     <body>

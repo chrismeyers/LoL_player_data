@@ -49,12 +49,15 @@ $apikey = "?api_key=" . file_get_contents('./notes/key.txt');
 
 //=========Parsing user data=========
 $summoner = str_replace(' ', '', $_POST['name']);
-$jsonSumm = file_get_contents($baseurl . $summonerdataurl . $summoner . 
+$jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
                               $apikey);  //summoner query
-if($jsonSumm == null){
-    header("Location: index.php?e=404");
+
+//Error handling if name is invalid.
+if($jsonSumm === false){
+    header('Location: index.php?e=404');
     exit();
 }
+
 $objSummArr = json_decode($jsonSumm, true);
 
 //Returned json and converted array

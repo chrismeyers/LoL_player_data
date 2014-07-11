@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 7, 2014, 10:21:29 PM
+    Author     : Chris Meyers
+*/
+html{
+    position: relative;
+    min-height: 100%;
+}
+    
+#namebox{
+    position: fixed;
+    width: 500px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin-top: -41px; /* Negative Half of of div height*/
+    margin-left: -260px; /* Negative Half of of div width*/
+    font-size: medium;
+}
+
+#main{
+    width: 500px;
+    text-align: left;
+    font-size: medium;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.values{
+    text-align: right;
+}
+
+table.centered{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    border: solid black 1px;
+    border-spacing: 10px;
+}
+
+td.icon{
+    text-align: center;
+}

@@ -1,7 +1,7 @@
 <?php
 //=========Determine region=========
 $regionurl = "";
-switch($_GET['region']){
+switch(strtolower($_GET['region'])){
     case "na":
         $regionurl = "na";
         break;

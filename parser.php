@@ -83,7 +83,7 @@ $objNormStatsArr = json_decode($jsonNormStats, true);
 //echo "<br />";
 //echo "<pre>"; var_dump($objNormStatsArr); echo "</pre>";
 //echo "<br /><br />";
-
+  
 //Number of game modes
 $gameModes = sizeof($objNormStatsArr["playerStatSummaries"]);
 

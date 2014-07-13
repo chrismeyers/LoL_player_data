@@ -1,4 +1,4 @@
-<?php include 'parser.php'; //Parsing Logic ?>
+<?php include 'parser.php'; include 'translations.php';?>
 <html>
     <head>
         <title>LoL player data</title>
@@ -6,10 +6,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         
-        <!-- CSS -->
         <link rel="stylesheet" href="custom.css">
-        <!-- jQuery -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+        <link rel="stylesheet" href="simplemodal/basic/css/basic.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="simplemodal/basic/js/jquery.simplemodal.js"></script>
     </head>
 
     <body>
@@ -63,24 +65,42 @@
                 </td>
             </table>
             
-            
-            <br /><br />
-
-            <?php 
+            <h2 style="text-align: center">Stat Summary</h2>
+            <div class="statbox">
+            <?php
+            $i = 1;
             //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
             foreach($modes as $currentMode){
-                echo "<b>" . $currentMode  . "</b><br />";
-                echo "Wins: " . ${$currentMode . 'Wins'} . "<br />";
+                echo "<table class='statTables'>";
+                echo "<div class='mode'>" . translateMode($currentMode)  . "</div>";
+                echo "<tr class='stats'>" . 
+                     "<td class='stat-name-half'>Wins</td>" .
+                     "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .
+                     "</td></tr>";
 
                 $currentStatArray = ${$currentMode . 'Stats'};
                 foreach($currentStatArray as $currentStat){
-                    echo ucfirst(preg_replace('/(?!^)[[:upper:]]+/',' \0', 
-                                 array_search($currentStat, $currentStatArray) . 
-                                 ": <span class='values'>" . $currentStat . "</span><br />"));
+                    echo preg_replace('/(?!^)[[:upper:]]+/',' \0', 
+                         "<tr class='stats'><td class='stat-name-half'>" . 
+                         ucfirst(array_search($currentStat, $currentStatArray)). 
+                         "</td> <td class='stat-value-half'>" . $currentStat . 
+                         "</td></tr>");
                 }
-                echo "<br /><br />";
+                
+                if($i < sizeof($modes)){
+                    echo "</table><br /><br />";
+                    $i++;
+                }
+                else{
+                    echo "</table>";
+                }   
             }
             ?>
+            </div>
+            
         </div>
+        
+        <?php include 'footer.php'; ?>
+        
     </body>
 </html>

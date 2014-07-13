@@ -1,7 +1,7 @@
 <?php
 //=========Determine region=========
 $regionurl = "";
-switch($_POST['region']){
+switch($_GET['region']){
     case "na":
         $regionurl = "na";
         break;
@@ -48,7 +48,7 @@ $rankedstatsurl = "/ranked";
 $apikey = "?api_key=" . file_get_contents('./notes/key.txt');
 
 //=========Parsing user data=========
-$summoner = str_replace(' ', '', $_POST['name']);
+$summoner = str_replace(' ', '', $_GET['name']);
 $jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
                               $apikey);  //summoner query
 

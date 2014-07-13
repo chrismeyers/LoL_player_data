@@ -25,7 +25,7 @@
                                 echo "<br /> Summoner not found.";
                         }
                     } ?>
-            <form action="main.php" method="post" target="_top">
+            <form action="main.php" method="get" target="_top">
                 <input type="text" placeholder="Name" name="name">
 
                 <select name="region">

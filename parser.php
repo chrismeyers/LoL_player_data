@@ -37,7 +37,6 @@ switch(strtolower($_GET['region'])){
         echo "Region not supported.";
 }
 
-
 //=========Core url data=========
 $baseurl = "https://" . $regionurl . ".api.pvp.net/api/lol/" . $regionurl;
 $summonerdataurl = "/v1.4/summoner/by-name/";

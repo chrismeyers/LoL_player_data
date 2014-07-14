@@ -47,7 +47,7 @@ $rankedstatsurl = "/ranked";
 $apikey = "?api_key=" . file_get_contents('./notes/key.txt');
 
 //=========Parsing user data=========
-$summoner = str_replace(' ', '', $_GET['name']);
+$summoner = str_replace(' ', '', strtolower($_GET['name']));
 $jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
                               $apikey);  //summoner query
 
@@ -65,7 +65,7 @@ $objSummArr = json_decode($jsonSumm, true);
 //echo "<pre>"; var_dump($objSummArr); echo "</pre>";
 
 //Save user data to vars
-$currentSummID = $objSummArr[lcfirst($summoner)]["id"];
+$currentSummID = $objSummArr[$summoner]["id"];
 $userName = $objSummArr[lcfirst($summoner)]["name"];
 $summLvl = $objSummArr[lcfirst($summoner)]["summonerLevel"];
 $currentSummAvatar = "http://avatar.leagueoflegends.com/" . $regionurl 

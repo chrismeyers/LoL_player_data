@@ -5,8 +5,6 @@
         <link rel="shortcut icon" href="images/lol_guy.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
-
-        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
         
         <link rel="stylesheet" href="custom.css">
         <link rel="stylesheet" href="simplemodal/basic/css/basic.css" type="text/css" media="screen" />

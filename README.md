@@ -8,8 +8,8 @@ that the player has earned.
 ##Usage:
 
 1. Create a folder in the root directory named 'notes'.
-2. Create a .txt file inside the 'notes' directory entitled 'key'.
-3. Enter your api key (can be found at https://developer.riotgames.com/)
+2. Create a .txt file inside the 'notes' directory entitled 'key.txt'.
+3. Enter your api key into the 'key.txt' file (key can be found at https://developer.riotgames.com/)
    * Make sure there are no spaces before, after, or in the 'key.txt' file.
 5. Use the form in **index.php** to search for a player.
 4. Alternatively, '**main.php'** can be invoked directly by appending a few url paramters:

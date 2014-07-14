@@ -14,6 +14,8 @@ that the player has earned.
 5. Use the form in **index.php** to search for a player.
 4. Alternatively, '**main.php'** can be invoked directly by appending a few url paramters:
    * EX: `/main.php?name=SUMMONER_NAME_HERE&region=REGION_HERE`
+     * Summoner name with spaces: use either **+** or **%20** to separate words or **omit spaces**.
+     * Valid regions = {BR, EUNE, EUW, KR, LAN, LAS, NA, OCE, RU, TR}.  Case insensitive.
 
 
 ##Legal

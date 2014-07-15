@@ -68,7 +68,10 @@
             <h2 style="text-align: center">Stat Summary</h2>
             <div class="statbox">
             <?php
-            if($jsonNormStats === false){
+            if(isset($php_errormsg) && strcmp($php_errormsg, "Undefined index: playerStatSummaries") == 0){
+                echo "<div style='text-align: center;'>No player stats found.</div>"; 
+            }
+            else{
                 $i = 1;
                 //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
@@ -97,9 +100,7 @@
                     }   
                 }
             }
-            else{
-                echo "<div style='text-align: center;'>No player stats found.</div>";
-            }
+            
             ?>
                 
             </div>

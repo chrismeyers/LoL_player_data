@@ -68,34 +68,40 @@
             <h2 style="text-align: center">Stat Summary</h2>
             <div class="statbox">
             <?php
-            $i = 1;
-            //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
-            foreach($modes as $currentMode){
-                echo "<table class='statTables'>";
-                echo "<div class='mode'>" . translateMode($currentMode)  . "</div>";
-                echo "<tr class='stats'>" . 
-                     "<td class='stat-name-half'>Wins</td>" .
-                     "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .
-                     "</td></tr>";
+            if($jsonNormStats === false){
+                $i = 1;
+                //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
+                foreach($modes as $currentMode){
+                    echo "<table class='statTables'>";
+                    echo "<div class='mode'>" . translateMode($currentMode)  . "</div>";
+                    echo "<tr class='stats'>" . 
+                         "<td class='stat-name-half'>Wins</td>" .
+                         "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .
+                         "</td></tr>";
 
-                $currentStatArray = ${$currentMode . 'Stats'};
-                foreach($currentStatArray as $currentStat){
-                    echo preg_replace('/(?!^)[[:upper:]]+/',' \0', 
-                         "<tr class='stats'><td class='stat-name-half'>" . 
-                         ucfirst(array_search($currentStat, $currentStatArray)). 
-                         "</td> <td class='stat-value-half'>" . $currentStat . 
-                         "</td></tr>");
+                    $currentStatArray = ${$currentMode . 'Stats'};
+                    foreach($currentStatArray as $currentStat){
+                        echo preg_replace('/(?!^)[[:upper:]]+/',' \0', 
+                             "<tr class='stats'><td class='stat-name-half'>" . 
+                             ucfirst(array_search($currentStat, $currentStatArray)). 
+                             "</td> <td class='stat-value-half'>" . $currentStat . 
+                             "</td></tr>");
+                    }
+
+                    if($i < sizeof($modes)){
+                        echo "</table><br /><br />";
+                        $i++;
+                    }
+                    else{
+                        echo "</table>";
+                    }   
                 }
-                
-                if($i < sizeof($modes)){
-                    echo "</table><br /><br />";
-                    $i++;
-                }
-                else{
-                    echo "</table>";
-                }   
+            }
+            else{
+                echo "<div style='text-align: center;'>No player stats found.</div>";
             }
             ?>
+                
             </div>
             
         </div>

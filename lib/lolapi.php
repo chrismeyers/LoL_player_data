@@ -106,7 +106,7 @@ class lolapi{
      * corresponding to the HTTP response is returned.
      */
     public function getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey){
-        $jsonSumm = file_get_contents($baseurl . $summonerdataurl . $summoner . 
+        $jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
                                       $apikey);  //summoner query
         $http_code = $this->error($http_response_header);
         if($http_code == NULL){
@@ -120,7 +120,7 @@ class lolapi{
     
     public function getStatSummary($baseurl, $statsurl, $currentSummID,
                                    $normalstatsurl, $apikey){
-        $jsonStatSummary = file_get_contents($baseurl . $statsurl . $currentSummID 
+        $jsonStatSummary = @file_get_contents($baseurl . $statsurl . $currentSummID 
                                            . $normalstatsurl . $apikey); 
         return $jsonStatSummary;
     }

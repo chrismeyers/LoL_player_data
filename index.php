@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>LoL player data</title>
@@ -6,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         
-        <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="web/custom.css">
         <link rel="stylesheet" href="simplemodal/basic/css/basic.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
@@ -17,16 +16,33 @@
 
     <body>
         <div id="namebox">
+            
             Please enter a Summoner name:
-            <?php if (!empty($_GET['e'])) {
-                        $message = $_GET['e'];
-                        switch($message){
-                            case(404):
-                                echo "<br /> Summoner not found.";
-                        }
-                    } ?>
-            <br /><br />
-            <form action="main.php" method="get" target="_top">
+            <?php 
+            if (!empty($_GET['e'])) {
+                    $message = $_GET['e'];
+                    switch($message){
+                        case(400):
+                            echo "<br /> <span class='error'>Bad request.</span>";
+                            break;
+                        case(401):
+                            echo "<br /> <span class='error'>Unauthorized.</span>";
+                            break;
+                        case(404):
+                            echo "<br /> <span class='error'>Summoner not found.</span>";
+                            break;
+                        case(429):
+                            echo "<br /> <span class='error'>Rate limit exceeded.</span>";
+                            break;
+                        case(500):
+                            echo "<br /> <span class='error'>Internal server error.</span>";
+                            break;
+                        case(503):
+                            echo "<br /> <span class='error'>Service unavailable.</span>";
+                            break;
+                    }}?><br /><br />
+                        
+            <form action="web/main.php" method="get" target="_top">
                 <input class="inputbox-mod" type="text" placeholder="Name" name="name">
 
                 <select class="inputbox-mod" name="region">
@@ -50,7 +66,7 @@
             </form>
         </div>
         
-        <?php include 'footer.php'; ?>
+        <?php include 'web/footer.php'; ?>
         
     </body>
 </html>

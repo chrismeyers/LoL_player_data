@@ -50,6 +50,10 @@ body{
     width:500px;
 }
 
+span.error{
+    color: red;
+}
+
 .footer-links{
     cursor: pointer;
     text-decoration: none;

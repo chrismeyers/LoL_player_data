@@ -1,4 +1,4 @@
-<?php include 'parser.php'; include 'translations.php';?>
+<?php include '../lib/parser.php'; include '../lib/translations.php';?>
 <html>
     <head>
         <title>LoL player data</title>
@@ -7,11 +7,11 @@
         <meta name="Author" content="Chris Meyers" />
         
         <link rel="stylesheet" href="custom.css">
-        <link rel="stylesheet" href="simplemodal/basic/css/basic.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script type="text/javascript" src="simplemodal/basic/js/jquery.simplemodal.js"></script>
+        <script type="text/javascript" src="../simplemodal/basic/js/jquery.simplemodal.js"></script>
     </head>
 
     <body>
@@ -68,6 +68,8 @@
             <h2 style="text-align: center">Stat Summary</h2>
             <div class="statbox">
             <?php
+            $translator = new Translations();
+            
             if(isset($php_errormsg) && strcmp($php_errormsg, "Undefined index: playerStatSummaries") == 0){
                 echo "<div style='text-align: center;'>No player stats found.</div>"; 
             }
@@ -76,7 +78,7 @@
                 //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
                     echo "<table class='statTables'>";
-                    echo "<div class='mode'>" . translateMode($currentMode)  . "</div>";
+                    echo "<div class='mode'>" . $translator->translateMode($currentMode) . "</div>";
                     echo "<tr class='stats'>" . 
                          "<td class='stat-name-half'>Wins</td>" .
                          "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .

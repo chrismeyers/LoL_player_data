@@ -1,63 +1,30 @@
 <?php
+include '../lib/lolapi.php';
+$lolapi = new lolapi();
+
 //=========Determine region=========
-$regionurl = "";
-switch(strtolower($_GET['region'])){
-    case "na":
-        $regionurl = "na";
-        break;
-    case "euw":
-        $regionurl = "euw";
-        break;
-    case "eune":
-        $regionurl = "eune";
-        break;
-    case "br":
-        $regionurl = "br";
-        break;
-    case "kr":
-        $regionurl = "kr";
-        break;
-    case "lan":
-        $regionurl = "lan";
-        break;
-    case "las":
-        $regionurl = "las";
-        break;
-    case "oce":
-        $regionurl = "oce";
-        break;
-    case "ru":
-        $regionurl = "ru";
-        break;
-    case "tr":
-        $regionurl = "tr";
-        break;
-    default:
-        $regionurl = "???";
-        echo "Region not supported.";
-}
+$regionurl = $lolapi->getRegion($_GET['region']);
 
 //=========Core url data=========
-$baseurl = "https://" . $regionurl . ".api.pvp.net/api/lol/" . $regionurl;
-$summonerdataurl = "/v1.4/summoner/by-name/";
-$championdataurl = "/v1.2/champion/";
-$statsurl = "/v1.3/stats/by-summoner/";
-$normalstatsurl = "/summary";
-$rankedstatsurl = "/ranked";
-$apikey = "?api_key=" . file_get_contents('./notes/key.txt');
+$baseurl = $lolapi->buildBaseUrl($regionurl);
+$summonerdataurl = $lolapi->getSummonerDataUrl();
+$championdataurl = $lolapi->getChampionDataUrl();
+$statsurl = $lolapi->getStatsUrl();
+$summarystatsurl = $lolapi->getSummaryStatsUrl();
+$rankedstatsurl = $lolapi->getRankedStatsUrl();
+$apikey = $lolapi->buildApiKeyUrl();
 
 //=========Parsing user data=========
-$summoner = str_replace(' ', '', strtolower($_GET['name']));
-$jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
-                              $apikey);  //summoner query
+$summoner = $lolapi->getSummoner(($_GET['name']));
+$jsonSumm = $lolapi->getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey);
 
-//Error handling if name is invalid.
-if($jsonSumm === false){
-    header('Location: index.php?e=404');
+//HTTP Error handling.
+if(in_array($jsonSumm, $lolapi->possibleErrors())){ 
+    header('Location: ../index.php?e=' . $jsonSumm);
     exit();
 }
 
-$objSummArr = json_decode($jsonSumm, true);
+$objSummArr = $lolapi->jsonToArray($jsonSumm);
 
 //Returned json and converted array
 //echo $jsonSumm;
@@ -65,21 +32,20 @@ $objSummArr = json_decode($jsonSumm, true);
 //echo "<pre>"; var_dump($objSummArr); echo "</pre>";
 
 //Save user data to vars
-$currentSummID = $objSummArr[$summoner]["id"];
-$userName = $objSummArr[lcfirst($summoner)]["name"];
-$summLvl = $objSummArr[lcfirst($summoner)]["summonerLevel"];
-$currentSummAvatar = "http://avatar.leagueoflegends.com/" . $regionurl 
-                        . "/" . $summoner .".png";
+$currentSummID = $lolapi->getSummonerId($objSummArr, $summoner);
+$userName = $lolapi->getFormattedName($objSummArr, $summoner);
+$summLvl = $lolapi->getSummonerLevel($objSummArr, $summoner);
+$currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 
 //echo "<br /><br />";
 //=========Current player normal stats=========
-$jsonNormStats = file_get_contents($baseurl . $statsurl . $currentSummID 
-                      . $normalstatsurl . $apikey); //normal stats query
-$objNormStatsArr = json_decode($jsonNormStats, true);
+$jsonStatSummary = $lolapi->getStatSummary($baseurl, $statsurl, $currentSummID, 
+                                           $summarystatsurl, $apikey);
+$objNormStatsArr = $lolapi->jsonToArray($jsonStatSummary);
 
 //Returned normal json and converted array
-//echo $jsonNormStats;
+//echo $jsonStatSummary;
 //echo "<br />";
 //echo "<pre>"; var_dump($objNormStatsArr); echo "</pre>";
 //echo "<br /><br />";
@@ -124,7 +90,7 @@ foreach($modes as $mode){
 //$objRankStatsArr = json_decode($jsonRankStats, true);
 
 //Returned ranked json and converted array
-/*echo $jsonRankStats;
-echo "<br />";
-echo "<pre>"; var_dump($objRankStatsArr); echo "</pre>";*/
+//echo $jsonRankStats;
+//echo "<br />";
+//echo "<pre>"; var_dump($objRankStatsArr); echo "</pre>";
 ?>

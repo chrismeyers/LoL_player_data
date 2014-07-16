@@ -1,6 +1,6 @@
 <?php
-function translateMode($rawMode){
-    $gameModeNames = array(
+class Translations{
+    private $gameModeNames = array(
         "AramUnranked5x5" => "ARAM",
         "CoopVsAI" => "Coop vs AI 5v5",
         "CoopVsAI3x3" => "Coop vs AI 3v3",
@@ -20,8 +20,9 @@ function translateMode($rawMode){
         "URF" => "Ultra Rapid Fire (URF)",
         "URFBots" => "URF Bots"
     );
-
-    $formattedMode = $gameModeNames[$rawMode];
-    return $formattedMode;
+    
+    function translateMode($rawMode){
+        $formattedMode = $this->gameModeNames[$rawMode];
+        return $formattedMode;
+    }
 }
-?>

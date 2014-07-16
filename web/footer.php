@@ -2,7 +2,7 @@
 echo "<div id='footer'>
             <a id='simplemodal-about' class='footer-links'>about</a>
             &nbsp;&bull;&nbsp; 
-            <a href='index.php' class='footer-links'> home </a> 
+            <a href='../index.php' class='footer-links'> home </a> 
             &nbsp;&bull;&nbsp 
             <a id='simplemodal-legal' class='footer-links'>legal</a>
         </div>

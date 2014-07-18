@@ -20,7 +20,7 @@ $jsonSumm = $lolapi->getSummonerData($baseurl, $summonerdataurl, $summoner, $api
 
 //HTTP Error handling.
 if(in_array($jsonSumm, $lolapi->possibleErrors())){ 
-    header('Location: ../index.php?e=' . $jsonSumm);
+    header('Location: ../web/index.php?e=' . $jsonSumm);
     exit();
 }
 
@@ -32,7 +32,7 @@ $objSummArr = $lolapi->jsonToArray($jsonSumm);
 //echo "<pre>"; var_dump($objSummArr); echo "</pre>";
 
 //Save user data to vars
-$currentSummID = $lolapi->getSummonerId($objSummArr, $summoner);
+$currentSummId = $lolapi->getSummonerId($objSummArr, $summoner);
 $userName = $lolapi->getFormattedName($objSummArr, $summoner);
 $summLvl = $lolapi->getSummonerLevel($objSummArr, $summoner);
 $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
@@ -40,8 +40,7 @@ $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 //echo "<br /><br />";
 //=========Current player normal stats=========
-$jsonStatSummary = $lolapi->getStatSummary($baseurl, $statsurl, $currentSummID, 
-                                           $summarystatsurl, $apikey);
+$jsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey);
 $objNormStatsArr = $lolapi->jsonToArray($jsonStatSummary);
 
 //Returned normal json and converted array
@@ -86,7 +85,7 @@ foreach($modes as $mode){
 }
 
 //=========Current player ranked stats=========
-//$jsonRankStats = file_get_contents($baseurl . $statsurl . $currentSummID . $rankedstatsurl . $apikey); //ranked stats query
+//$jsonRankStats = file_get_contents($baseurl . $statsurl . $currentSummId . $rankedstatsurl . $apikey); //ranked stats query
 //$objRankStatsArr = json_decode($jsonRankStats, true);
 
 //Returned ranked json and converted array

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>LoL player data</title>
-        <link rel="shortcut icon" href="images/lol_guy.ico">
+        <link rel="shortcut icon" href="../images/lol_guy.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         

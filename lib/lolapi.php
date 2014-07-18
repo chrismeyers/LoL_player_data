@@ -107,7 +107,7 @@ class lolapi{
      */
     public function getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey){
         $jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
-                                      $apikey);  //summoner query
+                                       $apikey);  //summoner query
         $http_code = $this->error($http_response_header);
         if($http_code == NULL){
             return $jsonSumm;
@@ -118,11 +118,9 @@ class lolapi{
         
     }
     
-    public function getStatSummary($baseurl, $statsurl, $currentSummID,
-                                   $normalstatsurl, $apikey){
-        $jsonStatSummary = @file_get_contents($baseurl . $statsurl . $currentSummID 
-                                           . $normalstatsurl . $apikey); 
-        return $jsonStatSummary;
+    public function getStatSummary($baseurl, $currentSummId, $apikey){
+        return @file_get_contents($baseurl . $this->statsurl . $currentSummId 
+                                           . $this->summarystatsurl . $apikey); 
     }
     
     public function jsonToArray($json){
@@ -130,7 +128,7 @@ class lolapi{
     }
     
     public function possibleErrors(){
-        return$codes = array(400, 401, 404, 429, 500, 503);
+        return array(400, 401, 404, 429, 500, 503);
     }
     
     public function error($errorResponse){

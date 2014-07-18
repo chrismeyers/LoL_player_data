@@ -1,16 +1,16 @@
 <html>
     <head>
         <title>LoL player data</title>
-        <link rel="shortcut icon" href="images/lol_guy.ico">
+        <link rel="shortcut icon" href="../images/lol_guy.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         
-        <link rel="stylesheet" href="web/custom.css">
-        <link rel="stylesheet" href="simplemodal/basic/css/basic.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script type="text/javascript" src="simplemodal/basic/js/jquery.simplemodal.js"></script>
+        <script type="text/javascript" src="../simplemodal/basic/js/jquery.simplemodal.js"></script>
         
     </head>
 
@@ -42,7 +42,7 @@
                             break;
                     }}?><br /><br />
                         
-            <form action="web/main.php" method="get" target="_top">
+            <form action="main.php" method="get" target="_top">
                 <input class="inputbox-mod" type="text" placeholder="Name" name="name">
 
                 <select class="inputbox-mod" name="region">
@@ -66,7 +66,7 @@
             </form>
         </div>
         
-        <?php include 'web/footer.php'; ?>
+        <?php include 'footer.php'; ?>
         
     </body>
 </html>

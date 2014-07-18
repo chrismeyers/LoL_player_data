@@ -4,6 +4,7 @@ class Translations{
         "AramUnranked5x5" => "ARAM",
         "CoopVsAI" => "Coop vs AI 5v5",
         "CoopVsAI3x3" => "Coop vs AI 3v3",
+        "NightmareBot" => "Doom Bots of Doom",
         "OdinUnranked" => "Dominion",
         "RankedPremade3x3" => "Ranked Premade 3v3",
         "RankedPremade5x5" => "Ranked Premade 5v5",

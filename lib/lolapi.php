@@ -8,48 +8,31 @@ class lolapi{
     private $rankedstatsurl = "/ranked";
     private $apikey = "?api_key=";
     
-    public function __construct() {
-        
-    }
-    
     public function getRegion($region){
-        $regionurl = "";
         switch(strtolower($region)){
             case "na":
-                $regionurl = "na";
-                break;
+                return "na";
             case "euw":
-                $regionurl = "euw";
-                break;
+                return "euw";
             case "eune":
-                $regionurl = "eune";
-                break;
+                return "eune";
             case "br":
-                $regionurl = "br";
-                break;
+                return "br";
             case "kr":
-                $regionurl = "kr";
-                break;
+                return "kr";
             case "lan":
-                $regionurl = "lan";
-                break;
+                return "lan";
             case "las":
-                $regionurl = "las";
-                break;
+                return "las";
             case "oce":
-                $regionurl = "oce";
-                break;
+                return "oce";
             case "ru":
-                $regionurl = "ru";
-                break;
+                return "ru";
             case "tr":
-                $regionurl = "tr";
-                break;
+                return "tr";
             default:
-                $regionurl = "???";
-                break;
+                return "???";
         }
-        return $regionurl;
     }
     
     public function buildBaseUrl($region){
@@ -57,8 +40,7 @@ class lolapi{
     }
     
     public function buildApiKeyUrl(){
-        $apikeyurl = $this->apikey . file_get_contents('../notes/key.txt');
-        return $apikeyurl;
+        return $this->apikey . file_get_contents('../notes/key.txt');
     }
     
     public function buildAvatarUrl($region, $name){

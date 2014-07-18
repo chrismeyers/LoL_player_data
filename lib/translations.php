@@ -23,7 +23,6 @@ class Translations{
     );
     
     function translateMode($rawMode){
-        $formattedMode = $this->gameModeNames[$rawMode];
-        return $formattedMode;
+        return $this->gameModeNames[$rawMode];
     }
 }

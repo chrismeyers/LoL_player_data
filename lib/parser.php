@@ -7,6 +7,7 @@ $regionurl = $lolapi->getRegion($_GET['region']);
 
 //=========Core url data=========
 $baseurl = $lolapi->buildBaseUrl($regionurl);
+$staticbaseurl = $lolapi->buildStaticBaseUrl($regionurl);
 $summonerdataurl = $lolapi->getSummonerDataUrl();
 $championdataurl = $lolapi->getChampionDataUrl();
 $statsurl = $lolapi->getStatsUrl();
@@ -39,7 +40,7 @@ $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 
 //echo "<br /><br />";
-//=========Current player normal stats=========
+//=========Current player stat summary=========
 $jsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey);
 $objNormStatsArr = $lolapi->jsonToArray($jsonStatSummary);
 
@@ -83,6 +84,24 @@ foreach($modes as $mode){
     //echo "<pre>"; var_dump(${$mode . 'Stats'}); echo "</pre>";
     //echo "<br />";
 }
+
+//=========Champion data (static)=========
+$staticChampData = $lolapi->getChampionData($staticbaseurl, $apikey, $regionurl, "236");
+$objStaticChampArr = $lolapi->jsonToArray($staticChampData);
+
+//Returned recent games json and converted array
+//echo $recentGamesUrl;
+//echo "<br />";
+echo "<pre>"; var_dump($objStaticChampArr); echo "</pre>";
+
+//=========Current player recent games=========
+$recentGamesUrl = $lolapi->getRecentGames($baseurl, $currentSummId, $apikey);
+$objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
+
+//Returned recent games json and converted array
+//echo $recentGamesUrl;
+//echo "<br />";
+echo "<pre>"; var_dump($objRecentGamesArr); echo "</pre>";
 
 //=========Current player ranked stats=========
 //$jsonRankStats = file_get_contents($baseurl . $statsurl . $currentSummId . $rankedstatsurl . $apikey); //ranked stats query

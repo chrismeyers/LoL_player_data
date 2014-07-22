@@ -2,12 +2,16 @@
 
 class lolapi{
     private $summonerdataurl = "/v1.4/summoner/by-name/";
-    private $championdataurl = "/v1.2/champion/";
+    private $championdataurl = "/v1.2/champion";
     private $statsurl = "/v1.3/stats/by-summoner/";
+    private $gameurl = "/v1.3/game/by-summoner/";
+    private $staticdataurl = "/static-data";
+    private $recenturl = "/recent";
     private $summarystatsurl = "/summary";
     private $rankedstatsurl = "/ranked";
     private $apikey = "?api_key=";
     
+    //=========Background player data=========
     public function getRegion($region){
         switch(strtolower($region)){
             case "na":
@@ -39,10 +43,15 @@ class lolapi{
         return "https://" . $region . ".api.pvp.net/api/lol/" . $region;
     }
     
+    public function buildStaticBaseUrl($region){
+        return "https://" . $region . ".api.pvp.net/api/lol";
+    }
+    
     public function buildApiKeyUrl(){
         return $this->apikey . file_get_contents('../notes/key.txt');
     }
     
+    //=========Current player data=========
     public function buildAvatarUrl($region, $name){
         return "http://avatar.leagueoflegends.com/" . $region . "/" . $name .".png";
     }
@@ -84,7 +93,7 @@ class lolapi{
     }
     
     /*
-     * Returns Summoner data json if name is valid.  Otherwise, an error code
+     * Returns Summoner data JSON if name is valid.  Otherwise, an error code
      * corresponding to the HTTP response is returned.
      */
     public function getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey){
@@ -100,15 +109,32 @@ class lolapi{
         
     }
     
+    //=========Stat summary=========
     public function getStatSummary($baseurl, $currentSummId, $apikey){
         return @file_get_contents($baseurl . $this->statsurl . $currentSummId 
                                            . $this->summarystatsurl . $apikey); 
     }
     
+    //=========Champion data (static)=========
+    public function getChampionData($baseurl, $apikey, $region, $champId){
+        // Does NOT count towards query limit
+        return @file_get_contents($baseurl . $this->staticdataurl . "/" . $region
+                                           . $this->championdataurl . "/" 
+                                           . $champId . $apikey); 
+    }
+    
+    //=========Recent games=========
+    public function getRecentGames($baseurl, $currentSummId, $apikey){
+        return @file_get_contents($baseurl . $this->gameurl . $currentSummId
+                                           . $this->recenturl . $apikey);
+    }
+    
+    //=========JSON conversion=========
     public function jsonToArray($json){
         return json_decode($json, true);
     }
     
+    //=========Error Handling=========
     public function possibleErrors(){
         return array(400, 401, 404, 429, 500, 503);
     }

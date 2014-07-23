@@ -60,6 +60,10 @@ class lolapi{
         return $this->summonerdataurl;
     }
     
+    public function getSummNameFromId($baseurl, $id, $region){
+        // $name = @file_get_contents($baseurl . );
+    }
+    
     public function getChampionDataUrl(){
         return $this->championdataurl;
     }

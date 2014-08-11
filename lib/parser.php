@@ -85,15 +85,6 @@ foreach($modes as $mode){
     //echo "<br />";
 }
 
-//=========Champion data (static)=========
-$staticChampData = $lolapi->getChampionData($staticbaseurl, $apikey, $regionurl, "236");
-$objStaticChampArr = $lolapi->jsonToArray($staticChampData);
-
-//Returned recent games json and converted array
-//echo $recentGamesUrl;
-//echo "<br />";
-echo "<pre>"; var_dump($objStaticChampArr); echo "</pre>";
-
 //=========Current player recent games=========
 $recentGamesUrl = $lolapi->getRecentGames($baseurl, $currentSummId, $apikey);
 $objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
@@ -101,7 +92,25 @@ $objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
 //Returned recent games json and converted array
 //echo $recentGamesUrl;
 //echo "<br />";
-echo "<pre>"; var_dump($objRecentGamesArr); echo "</pre>";
+//echo "<pre>"; var_dump($objRecentGamesArr); echo "</pre>";
+
+for($i = 0; $i < 10; $i++){
+    ${'recentMatch' . $i} = array();
+    $currentChampId = $objRecentGamesArr["games"][$i]["championId"];
+    $staticChampData = $lolapi->getChampionData($staticbaseurl, $regionurl, $currentChampId, $apikey);
+    $objStaticChampArr = $lolapi->jsonToArray($staticChampData);
+
+    //Returned recent games json and converted array
+    //echo $recentGamesUrl;
+    //echo "<br />";
+    //echo "<pre>"; var_dump($objStaticChampArr); echo "</pre>";
+
+    ${'recentMatch' . $i}["champName"] = $objStaticChampArr["name"];
+    ${'recentMatch' . $i}["mode"] = $objRecentGamesArr["games"][$i]["subType"]; //needs to be translated
+    ${'recentMatch' . $i}["team"] = $objRecentGamesArr["games"][$i]["teamId"]; //needs to be translated
+    ${'recentMatch' . $i}["spell1"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell1"], $apikey);
+    ${'recentMatch' . $i}["spell2"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell2"], $apikey);
+}
 
 //=========Current player ranked stats=========
 //$jsonRankStats = file_get_contents($baseurl . $statsurl . $currentSummId . $rankedstatsurl . $apikey); //ranked stats query

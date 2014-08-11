@@ -5,6 +5,7 @@ class lolapi{
     private $championdataurl = "/v1.2/champion";
     private $statsurl = "/v1.3/stats/by-summoner/";
     private $gameurl = "/v1.3/game/by-summoner/";
+    private $spellsurl = "/v1.2/summoner-spell/";
     private $staticdataurl = "/static-data";
     private $recenturl = "/recent";
     private $summarystatsurl = "/summary";
@@ -76,6 +77,14 @@ class lolapi{
         return $this->summarystatsurl;
     }
     
+    public function getSpellsUrl(){
+        return $this->spellsurl;
+    }
+    
+    public function getStaticDataUrl(){
+        return $this->staticdataurl;
+    }
+    
     public function getRankedStatsUrl(){
         return $this->rankedstatsurl;
     }
@@ -120,11 +129,21 @@ class lolapi{
     }
     
     //=========Champion data (static)=========
-    public function getChampionData($baseurl, $apikey, $region, $champId){
+    public function getChampionData($baseurl, $region, $champId, $apikey){
         // Does NOT count towards query limit
         return @file_get_contents($baseurl . $this->staticdataurl . "/" . $region
                                            . $this->championdataurl . "/" 
                                            . $champId . $apikey); 
+    }
+    
+    public function getSpellName($region, $id, $apikey){
+        $spellArr = $this->jsonToArray(@file_get_contents($this->staticbaseurl .
+                                                          $this->staticdataurl . 
+                                                          $region .
+                                                          $this->getSpellsUrl() .
+                                                          $id . $apikey));
+        
+        return $spellArr["name"];
     }
     
     //=========Recent games=========

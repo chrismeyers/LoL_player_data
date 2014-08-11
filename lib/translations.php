@@ -1,6 +1,6 @@
 <?php
 class Translations{
-    private $gameModeNames = array(
+    private $gameModeNamesSummary = array(
         "AramUnranked5x5" => "ARAM",
         "CoopVsAI" => "Coop vs AI 5v5",
         "CoopVsAI3x3" => "Coop vs AI 3v3",
@@ -22,7 +22,43 @@ class Translations{
         "URFBots" => "URF Bots"
     );
     
-    function translateMode($rawMode){
-        return $this->gameModeNames[$rawMode];
+    private $gameModeNamesRecent = array(
+        "NONE" => "None",
+        "NORMAL" => "Normal",
+        "BOT" => "Bot",
+        "RANKED_SOLO_5x5" => "Ranked Solo/Duo",
+        "RANKED_PREMADE_3x3" => "Ranked Premade 3v3",
+        "RANKED_PREMADE_5x5" => "Ranked Premade 5v5",
+        "ODIN_UNRANKED" => "Dominion",
+        "RANKED_TEAM_3x3" => "Ranked Teams 3v3",
+        "RANKED_TEAM_5x5" => "Ranked Teams 5v5",
+        "NORMAL_3x3" => "Normal 3v3",
+        "BOT_3x3" => "Bot 3v3",
+        "CAP_5x5" => "Team Builder",
+        "ARAM_UNRANKED_5x5" => "ARAM",
+        "ONEFORALL_5x5" => "One for All",
+        "FIRSTBLOOD_1x1" => "First Blood 1v1",
+        "FIRSTBLOOD_2x2" => "First Blood 2v2",
+        "SR_6x6" => "Hexakill",
+        "URF" => "Ultra Rapid Fire (URF)",
+        "URF_BOT" => "URF Bots",
+        "NIGHTMARE_BOT" => "Doom Bots of Doom"
+    );
+    
+    function translateModeSummary($rawMode){
+        return $this->gameModeNamesSummary[$rawMode];
+    }
+    
+    function translateModeRecent($rawMode){
+        return $this->gameModeNamesRecent[$rawMode];
+    }
+    
+    function translateTeam($teamCode){
+        if($teamCode === 100){
+            return "Blue Team";
+        }
+        else{
+            return "Purple Team";
+        }
     }
 }

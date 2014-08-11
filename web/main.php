@@ -70,6 +70,7 @@
             <?php
             $translator = new Translations();
             
+            // Stat Summary
             if(isset($php_errormsg) && strcmp($php_errormsg, "Undefined index: playerStatSummaries") == 0){
                 echo "<div style='text-align: center;'>No player stats found.</div>"; 
             }
@@ -78,7 +79,7 @@
                 //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
                     echo "<table class='statTables'>";
-                    echo "<div class='mode'>" . $translator->translateMode($currentMode) . "</div>";
+                    echo "<div class='mode'>" . $translator->translateModeSummary($currentMode) . "</div>";
                     echo "<tr class='stats'>" . 
                          "<td class='stat-name-half'>Wins</td>" .
                          "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .
@@ -107,6 +108,13 @@
                 
             </div>
             
+            <?php          
+            // Recent Matches
+            echo $recentMatch0["champName"] . " - " . $translator->translateModeRecent($recentMatch0["mode"])
+                    . " - " . $translator->translateTeam($recentMatch0["team"])
+                    . " - " . $recentMatch0["spell1"]
+                    . " - " . $recentMatch0["spell2"];
+            ?>
         </div>
         
         <?php include 'footer.php'; ?>

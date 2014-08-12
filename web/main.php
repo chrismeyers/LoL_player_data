@@ -109,11 +109,16 @@
             </div>
             
             <?php          
-            // Recent Matches
-            echo $recentMatch0["champName"] . " - " . $translator->translateModeRecent($recentMatch0["mode"])
-                    . " - " . $translator->translateTeam($recentMatch0["team"])
-                    . " - " . $recentMatch0["spell1"]
-                    . " - " . $recentMatch0["spell2"];
+            // Recent Matches - Slows down site due to API throttling.
+            /*
+            for($match = 0; $match < 10; $match++){
+                echo ${'recentMatch'.$match}["champName"] . " - " . $translator->translateModeRecent(${'recentMatch'.$match}["mode"])
+                    . " - " . $translator->translateTeam(${'recentMatch'.$match}["team"])
+                    . " - " . ${'recentMatch'.$match}["spell1"]
+                    . " - " . ${'recentMatch'.$match}["spell2"];
+                echo "<br />";
+            }
+            */
             ?>
         </div>
         

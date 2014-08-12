@@ -128,20 +128,19 @@ class lolapi{
                                            . $this->summarystatsurl . $apikey); 
     }
     
-    //=========Champion data (static)=========
+    //=========Static Data=========
+    //Does NOT count towards query limit
     public function getChampionData($baseurl, $region, $champId, $apikey){
-        // Does NOT count towards query limit
         return @file_get_contents($baseurl . $this->staticdataurl . "/" . $region
                                            . $this->championdataurl . "/" 
                                            . $champId . $apikey); 
     }
     
     public function getSpellName($region, $id, $apikey){
-        $spellArr = $this->jsonToArray(@file_get_contents($this->staticbaseurl .
-                                                          $this->staticdataurl . 
-                                                          $region .
-                                                          $this->getSpellsUrl() .
-                                                          $id . $apikey));
+        $spellJson = @file_get_contents($this->buildStaticBaseUrl($region) .
+                                        $this->staticdataurl . "/" .$region .
+                                        $this->spellsurl . $id . $apikey);
+        $spellArr = $this->jsonToArray($spellJson);
         
         return $spellArr["name"];
     }

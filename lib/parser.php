@@ -85,7 +85,9 @@ foreach($modes as $mode){
     //echo "<br />";
 }
 
+/*
 //=========Current player recent games=========
+//Slows down site due to API throttling.
 $recentGamesUrl = $lolapi->getRecentGames($baseurl, $currentSummId, $apikey);
 $objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
 
@@ -104,20 +106,12 @@ for($i = 0; $i < 10; $i++){
     //echo $recentGamesUrl;
     //echo "<br />";
     //echo "<pre>"; var_dump($objStaticChampArr); echo "</pre>";
-
+     
     ${'recentMatch' . $i}["champName"] = $objStaticChampArr["name"];
     ${'recentMatch' . $i}["mode"] = $objRecentGamesArr["games"][$i]["subType"]; //needs to be translated
     ${'recentMatch' . $i}["team"] = $objRecentGamesArr["games"][$i]["teamId"]; //needs to be translated
     ${'recentMatch' . $i}["spell1"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell1"], $apikey);
     ${'recentMatch' . $i}["spell2"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell2"], $apikey);
 }
-
-//=========Current player ranked stats=========
-//$jsonRankStats = file_get_contents($baseurl . $statsurl . $currentSummId . $rankedstatsurl . $apikey); //ranked stats query
-//$objRankStatsArr = json_decode($jsonRankStats, true);
-
-//Returned ranked json and converted array
-//echo $jsonRankStats;
-//echo "<br />";
-//echo "<pre>"; var_dump($objRankStatsArr); echo "</pre>";
+*/
 ?>

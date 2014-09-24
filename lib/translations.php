@@ -19,7 +19,8 @@ class Translations{
         "SummonersRift6x6" => "Hexakill",
         "CAP5x5" => "Team Builder",
         "URF" => "Ultra Rapid Fire (URF)",
-        "URFBots" => "URF Bots"
+        "URFBots" => "URF Bots",
+        "Ascension" => "Ascension"
     );
     
     private $gameModeNamesRecent = array(
@@ -42,7 +43,8 @@ class Translations{
         "SR_6x6" => "Hexakill",
         "URF" => "Ultra Rapid Fire (URF)",
         "URF_BOT" => "URF Bots",
-        "NIGHTMARE_BOT" => "Doom Bots of Doom"
+        "NIGHTMARE_BOT" => "Doom Bots of Doom",
+        "ASCENSION_5x5" => "Ascension"
     );
     
     function translateModeSummary($rawMode){

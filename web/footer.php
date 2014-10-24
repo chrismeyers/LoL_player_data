@@ -10,7 +10,7 @@ echo "<div id='footer'>
         <div id='about' style='margin-top: 50px; display:none;'>
             <h1 style='text-align: center;'>about</h1>
             This is a summer project that I am working on based on the video
-            game League of Legends. It is very much in development. Currently,
+            game <i>League of Legends</i>.  Currently,
             you can enter a player name and various information about this
             player will be parsed and presented to you. This information
             includes: summoner name, level, region, icon and a listing of all

@@ -1,8 +1,8 @@
 LoL_player_data
 ===============
 
-This is a summer project that I am working on based on the video game *League of Legends*.  It is very much **in
-development**.  Currently, you can enter a player name and various information about this player will be parsed and presented to you.  This information includes: summoner name, level, region, icon and a listing of all game mode stats
+This is a summer project that I am working on based on the video game *League of Legends*.  
+Currently, you can enter a player name and various information about this player will be parsed and presented to you.  This information includes: summoner name, level, region, icon and a listing of all game mode stats
 that the player has earned.
 
 ##Usage:

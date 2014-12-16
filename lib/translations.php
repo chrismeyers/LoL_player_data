@@ -21,7 +21,8 @@ class Translations{
         "CAP5x5" => "Team Builder",
         "URF" => "Ultra Rapid Fire (URF)",
         "URFBots" => "URF Bots",
-        "Ascension" => "Ascension"
+        "Ascension" => "Ascension",
+        "KingPoro" => "Legend of the Poro King"
     );
     
     private $gameModeNamesRecent = array(

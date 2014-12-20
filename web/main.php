@@ -1,4 +1,5 @@
 <?php include '../lib/parser.php'; include '../lib/translations.php';?>
+<!DOCTYPE html>
 <html>
     <head>
         <title>LoL player data</title>

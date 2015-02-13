@@ -24,7 +24,7 @@
                     $message = $_GET['e'];
                     switch($message){
                         case(400):
-                            echo "<br /> <span class='error'>Bad request.</span>";
+                            echo "<br /> <span class='error'>Bad request. Unspecified Summoner name.</span>";
                             break;
                         case(401):
                             echo "<br /> <span class='error'>Unauthorized.</span>";
@@ -46,7 +46,7 @@
             <form action="main.php" method="get" target="_top">
                 <input class="inputbox-mod" type="text" placeholder="Name" name="name">
 
-                <select class="inputbox-mod" name="region">
+                <select class="inputbox-mod" name="region" id="region">
                     <option value="na">na</option>
                     <option value="euw">euw</option>
                     <option value="eune">eune</option>
@@ -68,6 +68,6 @@
         </div>
         
         <?php include 'footer.php'; ?>
-        
+             
     </body>
 </html>

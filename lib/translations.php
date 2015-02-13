@@ -22,7 +22,8 @@ class Translations{
         "URF" => "Ultra Rapid Fire (URF)",
         "URFBots" => "URF Bots",
         "Ascension" => "Ascension",
-        "KingPoro" => "Legend of the Poro King"
+        "KingPoro" => "Legend of the Poro King",
+        "CounterPick" => "Nemesis Draft"
     );
     
     private $gameModeNamesRecent = array(

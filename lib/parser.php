@@ -41,22 +41,58 @@ $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 //echo "<br /><br />";
 //=========Current player stat summary=========
-$jsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey);
+$jsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, "SEASON2014");
 $objNormStatsArr = $lolapi->jsonToArray($jsonStatSummary);
 
-//Returned normal json and converted array
-//echo $jsonStatSummary;
+//Returned normal stats json and converted array
+//decho $jsonStatSummary;
 //echo "<br />";
 //echo "<pre>"; var_dump($objNormStatsArr); echo "</pre>";
 //echo "<br /><br />";
-  
+
+$jsonStatSummary2015 = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, "SEASON2015");
+$objNormStatsArr2015 = $lolapi->jsonToArray($jsonStatSummary2015);
+
+//Returned normal stats json and converted array
+//decho $jsonStatSummary2015;
+//echo "<br />";
+//echo "<pre>"; var_dump($objNormStatsArr2015); echo "</pre>";
+//echo "<br /><br />";
+
 //Number of game modes
 $gameModes = sizeof($objNormStatsArr["playerStatSummaries"]);
 
+//Add modes before 2015
 $modes = array();
-for($i = 0;$i < $gameModes; $i++){
-    array_push($modes, $objNormStatsArr["playerStatSummaries"]
-                                       [$i]["playerStatSummaryType"]);
+for($i = 0; $i < $gameModes; $i++){
+    $newMode = $objNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
+    array_push($modes, $newMode);
+    
+}
+
+//Add new 2015 game modes
+$gameModes2015 = sizeof($objNormStatsArr2015["playerStatSummaries"]);
+$newmodes = array();
+for($j = 0; $j < $gameModes2015; $j++){
+    $found = FALSE;
+    $oldMode = 0;
+    $modeFrom2015 = $objNormStatsArr2015["playerStatSummaries"][$j]["playerStatSummaryType"];
+    
+    while($oldMode < $gameModes){
+        $oldModeName = $objNormStatsArr["playerStatSummaries"][$oldMode]["playerStatSummaryType"];
+        if(strcmp($modeFrom2015, $oldModeName) == 0){
+            $found = TRUE;
+            break;
+        }
+        $oldMode++;
+    }
+    if($found == FALSE){
+        array_push($newmodes, $objNormStatsArr2015["playerStatSummaries"][$j]);
+        array_push($modes, $modeFrom2015);
+    }
+}
+for($addNew = 0; $addNew < sizeof($newmodes); $addNew++){
+    array_push($objNormStatsArr["playerStatSummaries"], $newmodes[$addNew]);
 }
 
 //echo "<pre>"; var_dump($modes); echo "</pre>";

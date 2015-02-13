@@ -10,7 +10,7 @@ class lolapi{
     private $recenturl = "/recent";
     private $summarystatsurl = "/summary";
     private $rankedstatsurl = "/ranked";
-    private $apikey = "?api_key=";
+    private $apikeytext = "?api_key=";
     
     //=========Background player data=========
     public function getRegion($region){
@@ -49,7 +49,7 @@ class lolapi{
     }
     
     public function buildApiKeyUrl(){
-        return $this->apikey . file_get_contents('../notes/key.txt');
+        return $this->apikeytext . file_get_contents('../notes/key.txt');
     }
     
     //=========Current player data=========
@@ -123,9 +123,10 @@ class lolapi{
     }
     
     //=========Stat summary=========
-    public function getStatSummary($baseurl, $currentSummId, $apikey){
+    public function getStatSummary($baseurl, $currentSummId, $apikey, $season){
         return @file_get_contents($baseurl . $this->statsurl . $currentSummId 
-                                           . $this->summarystatsurl . $apikey); 
+                                           . $this->summarystatsurl . $apikey 
+                                           . "&season=" . $season); 
     }
     
     //=========Static Data=========

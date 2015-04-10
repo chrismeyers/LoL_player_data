@@ -54,18 +54,52 @@ for($s = 0; $s < sizeof($seasons); $s++){
     
     ${"gameModes" . $season} = sizeof(${"objNormStatsArr" . $season}["playerStatSummaries"]);
     
-    if($s == sizeof($seasons)-1){
-        //Current season, push all data
-        for($i = 0; $i < ${"gameModes" . $season}; $i++){
+    
+    for($i = 0; $i < ${"gameModes" . $season}; $i++){
+        if($s == sizeof($seasons)-1){
+            //Current season, push all data
+            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
+            $found = FALSE;
+
+            //URF 2015
+            if((strcmp($newMode, "URF") == 0 || strcmp($newMode, "URFBots") == 0) && strcmp($season, "SEASON2015") == 0){
+                $newMode .= "2015";
+                $found = TRUE;
+            }
+
+            if($found){
+                ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
+            }
+
             array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
         }
-    }
-    else{
-        //A previous season, only push featured modes.
-        for($j = 0; $j < ${"gameModes" . $season}; $j++){
-            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$j]["playerStatSummaryType"];
-            if($featured->isFeaturedMode($newMode)){
-                array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$j]);
+        else{
+            //A previous season, only push featured modes.
+            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
+            $found = FALSE;
+
+            //One for all orginal
+            if(strcmp($newMode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
+                $newMode .= "Vanilla";
+                $found = TRUE;
+            }
+            //One for all mirror
+            else if(strcmp($newMode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2014") == 0){
+                $newMode .= "Mirror";
+                $found = TRUE;
+            }
+            //URF 2014
+            else if((strcmp($newMode, "URF") == 0 || strcmp($newMode, "URFBots") == 0) && strcmp($season, "SEASON2014") == 0){
+                $newMode .= "2014";
+                $found = TRUE;
+            }
+
+            if($found){
+                ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
+            }
+
+            if($featured->isFeaturedMode($newMode) || $found){
+                array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
             }
         }
     }

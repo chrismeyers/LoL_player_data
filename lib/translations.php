@@ -14,6 +14,8 @@ class Translations{
         "Unranked" => "Normal 5v5",
         "Unranked3x3" => "Normal 3v3",
         "OneForAll5x5" => "One for All",
+        "OneForAll5x5Vanilla" => "One for All",
+        "OneForAll5x5Mirror" => "One for All: Mirror",
         "FirstBlood1x1" =>  "First Blood 1v1",
         "FirstBlood2x2" => "First Blood 2v2", 
         "SummonersRift6x6" => "Hexakill: Summoner's Rift",

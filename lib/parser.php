@@ -42,46 +42,38 @@ $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 //echo "<br /><br />";
 //=========Current player stat summary=========
-$jsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, "SEASON2014");
-$objNormStatsArr = $lolapi->jsonToArray($jsonStatSummary);
-
-//Returned normal stats json and converted array
-//decho $jsonStatSummary;
-//echo "<br />";
-//echo "<pre>"; var_dump($objNormStatsArr); echo "</pre>";
-//echo "<br /><br />";
-
-$jsonStatSummary2015 = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, "SEASON2015");
-$objNormStatsArr2015 = $lolapi->jsonToArray($jsonStatSummary2015);
-
-//Returned normal stats json and converted array
-//decho $jsonStatSummary2015;
-//echo "<br />";
-//echo "<pre>"; var_dump($objNormStatsArr2015); echo "</pre>";
-//echo "<br /><br />";
-
-//Number of game modes
-$gameModes2014 = sizeof($objNormStatsArr["playerStatSummaries"]);
-$gameModes2015 = sizeof($objNormStatsArr2015["playerStatSummaries"]);
-
-//Add modes before 2015
+$seasons = array("SEASON3", "SEASON2014", "SEASON2015");  //ADD NEW SEASONS TO END OF THIS ARRAY
 $modes = array();
 $featured = new Featured();
 
-//Get the featured modes from 2014.
-for($i = 0; $i < $gameModes2014; $i++){
-    $newMode = $objNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
-    if($featured->isFeaturedMode($newMode)){
-        array_push($modes, $objNormStatsArr["playerStatSummaries"][$i]);
+for($s = 0; $s < sizeof($seasons); $s++){
+    $season = $seasons[$s];
+
+    ${"jsonStatSummary" . $season} = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, $season);
+    ${"objNormStatsArr" . $season} = $lolapi->jsonToArray(${"jsonStatSummary" . $season});
+    
+    ${"gameModes" . $season} = sizeof(${"objNormStatsArr" . $season}["playerStatSummaries"]);
+    
+    if($s == sizeof($seasons)-1){
+        //Current season, push all data
+        for($i = 0; $i < ${"gameModes" . $season}; $i++){
+            array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
+        }
+    }
+    else{
+        //A previous season, only push featured modes.
+        for($j = 0; $j < ${"gameModes" . $season}; $j++){
+            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$j]["playerStatSummaryType"];
+            if($featured->isFeaturedMode($newMode)){
+                array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$j]);
+            }
+        }
     }
 }
 
-//Get all the 2015 modes.
-for($j = 0; $j < $gameModes2015; $j++){
-    array_push($modes, $objNormStatsArr2015["playerStatSummaries"][$j]);
-}
-
+//echo "<br />";
 //echo "<pre>"; var_dump($modes); echo "</pre>";
+//echo "<br /><br />";
 
 //Generate variable with stats for all modes
 foreach($modes as $mode){
@@ -105,7 +97,7 @@ foreach($modes as $mode){
     //echo "<br />";
 }
 
-//Alphabatize the modes
+//Alphabetize the modes
 sort($modes);
 
 /*

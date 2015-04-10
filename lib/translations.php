@@ -20,7 +20,11 @@ class Translations{
         "Hexakill" => "Hexakill: Twisted Treeline",
         "CAP5x5" => "Team Builder",
         "URF" => "Ultra Rapid Fire (URF)",
-        "URFBots" => "URF Bots",
+        "URFBots" => "Ultra Rapid Fire (URF) Bots",
+        "URF2014" => "Ultra Rapid Fire (URF) 2014",
+        "URFBots2014" => "Ultra Rapid Fire (URF) Bots 2014",
+        "URF2015" => "Ultra Rapid Fire (URF) 2015",
+        "URFBots2015" => "Ultra Rapid Fire (URF) Bots 2015",
         "Ascension" => "Ascension",
         "KingPoro" => "Legend of the Poro King",
         "CounterPick" => "Nemesis Draft"

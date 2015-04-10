@@ -1,5 +1,6 @@
 <?php
 include '../lib/lolapi.php';
+include '../lib/featured.php';
 $lolapi = new lolapi();
 
 //=========Determine region=========
@@ -60,39 +61,24 @@ $objNormStatsArr2015 = $lolapi->jsonToArray($jsonStatSummary2015);
 //echo "<br /><br />";
 
 //Number of game modes
-$gameModes = sizeof($objNormStatsArr["playerStatSummaries"]);
+$gameModes2014 = sizeof($objNormStatsArr["playerStatSummaries"]);
+$gameModes2015 = sizeof($objNormStatsArr2015["playerStatSummaries"]);
 
 //Add modes before 2015
 $modes = array();
-for($i = 0; $i < $gameModes; $i++){
+$featured = new Featured();
+
+//Get the featured modes from 2014.
+for($i = 0; $i < $gameModes2014; $i++){
     $newMode = $objNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
-    array_push($modes, $newMode);
-    
+    if($featured->isFeaturedMode($newMode)){
+        array_push($modes, $objNormStatsArr["playerStatSummaries"][$i]);
+    }
 }
 
-//Add new 2015 game modes
-$gameModes2015 = sizeof($objNormStatsArr2015["playerStatSummaries"]);
-$newmodes = array();
+//Get all the 2015 modes.
 for($j = 0; $j < $gameModes2015; $j++){
-    $found = FALSE;
-    $oldMode = 0;
-    $modeFrom2015 = $objNormStatsArr2015["playerStatSummaries"][$j]["playerStatSummaryType"];
-    
-    while($oldMode < $gameModes){
-        $oldModeName = $objNormStatsArr["playerStatSummaries"][$oldMode]["playerStatSummaryType"];
-        if(strcmp($modeFrom2015, $oldModeName) == 0){
-            $found = TRUE;
-            break;
-        }
-        $oldMode++;
-    }
-    if($found == FALSE){
-        array_push($newmodes, $objNormStatsArr2015["playerStatSummaries"][$j]);
-        array_push($modes, $modeFrom2015);
-    }
-}
-for($addNew = 0; $addNew < sizeof($newmodes); $addNew++){
-    array_push($objNormStatsArr["playerStatSummaries"], $newmodes[$addNew]);
+    array_push($modes, $objNormStatsArr2015["playerStatSummaries"][$j]);
 }
 
 //echo "<pre>"; var_dump($modes); echo "</pre>";
@@ -100,26 +86,33 @@ for($addNew = 0; $addNew < sizeof($newmodes); $addNew++){
 //Generate variable with stats for all modes
 foreach($modes as $mode){
     $currentModeIndex = array_search($mode, $modes);
-    $currentModeStatValues = $objNormStatsArr["playerStatSummaries"]
-                                             [$currentModeIndex]
-                                             ["aggregatedStats"];
-
+    $currentModeStatValues = $modes[$currentModeIndex]["aggregatedStats"];
+    $currentModeName = $modes[$currentModeIndex]["playerStatSummaryType"];
+    
     //Mode stat arrays
-    ${$mode . 'Stats'} = array();
-
+    ${$currentModeName . 'Stats'} = array();
+    
     //Mode win variable
-    ${$mode . 'Wins'} = $objNormStatsArr["playerStatSummaries"]
-                                        [$currentModeIndex]["wins"];
+    ${$currentModeName . 'Wins'} = $modes[$currentModeIndex]["wins"];
     
     foreach($currentModeStatValues as $stat){
         //Get Current stat name from array
         $currentStatName = array_search($stat, $currentModeStatValues);
         //Add entry to current gamemode array
-        ${$mode . 'Stats'}[$currentStatName] = $stat;
+        ${$currentModeName . 'Stats'}[$currentStatName] = $stat;
     }
     //echo "<pre>"; var_dump(${$mode . 'Stats'}); echo "</pre>";
     //echo "<br />";
 }
+
+//Alphabatize the modes
+sort($modes);
+
+/*
+echo "<br />";
+echo "<pre>"; var_dump($modes); echo "</pre>";
+echo "<br /><br />";
+*/
 
 /*
 //=========Current player recent games=========

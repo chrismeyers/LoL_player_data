@@ -80,17 +80,17 @@
                 //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
                     echo "<table class='statTables'>";
-                    echo "<div class='mode'>" . $translator->translateModeSummary($currentMode) . "</div>";
+                    echo "<div class='mode'>" . $translator->translateModeSummary($currentMode["playerStatSummaryType"]) . "</div>";
                     echo "<tr class='stats'>" . 
                          "<td class='stat-name-half'>Wins</td>" .
-                         "<td class='stat-value-half'>" . ${$currentMode . 'Wins'} .
+                         "<td class='stat-value-half'>" . ${$currentMode["playerStatSummaryType"] . 'Wins'} .
                          "</td></tr>";
 
-                    $currentStatArray = ${$currentMode . 'Stats'};
+                    $currentStatArray = ${$currentMode["playerStatSummaryType"] . 'Stats'};
                     foreach($currentStatArray as $currentStat){
                         echo preg_replace('/(?!^)[[:upper:]]+/',' \0', 
                              "<tr class='stats'><td class='stat-name-half'>" . 
-                             ucfirst(array_search($currentStat, $currentStatArray)). 
+                             ucfirst(array_search($currentStat, ${$currentMode["playerStatSummaryType"] . 'Stats'})) .
                              "</td> <td class='stat-value-half'>" . $currentStat . 
                              "</td></tr>");
                     }

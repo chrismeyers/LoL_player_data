@@ -30,12 +30,14 @@ echo "<div id='footer'>
         <script>
             $('#simplemodal-about').click(function() {
                 $('#about').modal({
-                    overlayClose:true
+                    overlayClose:true,
+                    autoResize:true
                 });
             });
             $('#simplemodal-legal').click(function() {
                 $('#legal').modal({
-                    overlayClose:true
+                    overlayClose:true,
+                    autoResize:true
                 });
             });
         </script>";

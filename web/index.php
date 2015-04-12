@@ -6,7 +6,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        
         <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="custom-small.css">
         <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
@@ -44,9 +47,9 @@
                     }}?><br /><br />
                         
             <form action="main.php" method="get" target="_top">
-                <input class="inputbox-mod" type="text" placeholder="Name" name="name">
+                <input class="inputbox-mod inputbox-mod-name" type="text" placeholder="Summoner Name" name="name">
 
-                <select class="inputbox-mod" name="region" id="region">
+                <select class="inputbox-mod inputbox-mod-region" name="region" id="region">
                     <option value="na">na</option>
                     <option value="euw">euw</option>
                     <option value="eune">eune</option>

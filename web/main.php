@@ -7,7 +7,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="Author" content="Chris Meyers" />
         
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        
         <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="custom-small.css">
         <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
@@ -17,8 +20,8 @@
 
     <body>
         <div id="main">
-            <table class="centered">
-                <td class="icon">
+            <div class="summoner">
+                <div class="summoner-info">
                     <h1> 
                         <?php 
                         echo $userName . " <br /> Level: " .$summLvl;
@@ -60,11 +63,11 @@
                         }
                         ?> 
                     </h1>
-                </td>
-                <td class="icon">
+                </div>
+                <div class="summoner-icon">
                     <img src="<?php echo $currentSummAvatar; ?>">
-                </td>
-            </table>
+                </div>
+            </div>
             
             <h2 style="text-align: center">Stat Summary</h2>
             <div class="statbox">
@@ -101,7 +104,7 @@
                         $i++;
                     }
                     else{
-                        echo "</table>";
+                        echo "</table><br />";
                     }   
                 }
             }

@@ -4,10 +4,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Jul 7, 2014, 10:21:29 PM
+    Created on : Apr 12, 2015, 2:43:16 PM
     Author     : Chris Meyers
 */
-@media screen and (min-width: 525px){
+@media screen and (max-width: 524px){
     html{
         position: relative;
         min-height: 100%;
@@ -20,18 +20,15 @@ and open the template in the editor.
     }
 
     #namebox{
-        position: fixed;
-        width: 500px;
-        text-align: center;
-        top: 50%;
+        margin-top: 50%;
+        width: auto;
         left: 50%;
-        margin-top: -73px; /* Negative Half of of div height*/
-        margin-left: -250px; /* Negative Half of of div width*/
         font-size: medium;
+        text-align: center;
     }
 
     #main{
-        width: 500px;
+        width: auto;
         text-align: left;
         font-size: medium;
         margin-left: auto;
@@ -49,7 +46,7 @@ and open the template in the editor.
         left:0;
         right:0;
         text-align: center;
-        width:500px;
+        width:auto;
         font-size: small;
     }
 
@@ -72,58 +69,47 @@ and open the template in the editor.
     }
 
     .summoner{
-        position: relative;
-        width: 498px;
-        height: 155px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        border: solid black 1px;
-        border-spacing: 10px;
-        font-size: small; 
-    }
-
-    .summoner-info{
-        position: absolute;
-        padding-left: 50px;
-        padding-top: 15px;
+        width: auto;
+        font-size: small;
     }
     
     .summoner-icon{
-        padding-left: 65%;
-        padding-top: 12px;
+        
+    }
+    
+    .summoner-icon{
+        
     }
 
     .modaltxt{
         font-size: small;
     }
-
+    
     .statbox{
-        overflow:scroll;
-        height: 500px;
-        border: solid black 1px;
-        padding: 20px;
-        overflow-x: hidden;
+        width: auto;
         font-size: small;
     }
-
+    
     .statTables{
-        width:450px;
+        width: 100%;
         border-collapse: collapse;
     }
-
+    
     .mode{
-        width: 450px;
+        width: auto;
         text-align: center;
         background: #000000;
         color: #FFFFFF;
         font-weight: bold;
     }
     td.stat-name-half{
-        width: 50%;
+        width: 75%;
     }
     td.stat-value-half{
-        width: 50%;
+        width: 25%;
         text-align: right;
     }
 
@@ -131,7 +117,47 @@ and open the template in the editor.
         color: black;
         background-color: white;
     }
-
+    
+    .inputbox-mod-name{
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: x-large;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #cccccc;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .inputbox-mod-name:focus{
+        outline: none;
+        border-color: #3399FF;
+        box-shadow: 0 0 10px #3399FF;
+    }
+    
+    .inputbox-mod-region{
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: x-large;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #cccccc;
+        text-align: center;
+        margin-left: auto;
+    }
+    .inputbox-mod-region:focus{
+        outline: none;
+        border-color: #3399FF;
+        box-shadow: 0 0 10px #3399FF;
+    }
+    
     .inputbox-mod{
         padding-left: 5px;
         padding-right: 5px;
@@ -195,49 +221,5 @@ and open the template in the editor.
     }.submit-button:active {
             position:relative;
             top:1px;
-    }
-
-    /* Spinner */
-    .spinner {
-      margin: 100px auto;
-      width: 50px;
-      height: 30px;
-      text-align: center;
-      font-size: 10px;
-    }
-
-    .spinner > div {
-      background-color: #333;
-      height: 100%;
-      width: 6px;
-      display: inline-block;
-
-      -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
-      animation: stretchdelay 1.2s infinite ease-in-out;
-    }
-
-    .spinner .rect2 {
-      -webkit-animation-delay: -1.1s;
-      animation-delay: -1.1s;
-    }
-
-    .spinner .rect3 {
-      -webkit-animation-delay: -1.0s;
-      animation-delay: -1.0s;
-    }
-
-    .spinner .rect4 {
-      -webkit-animation-delay: -0.9s;
-      animation-delay: -0.9s;
-    }
-
-    .spinner .rect5 {
-      -webkit-animation-delay: -0.8s;
-      animation-delay: -0.8s;
-    }
-
-    @-webkit-keyframes stretchdelay {
-      0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
-      20% { -webkit-transform: scaleY(1.0) }
     }
 }

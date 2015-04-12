@@ -11,6 +11,7 @@ html{
     position: relative;
     min-height: 100%;
     background-color: #CFCFCF;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 body{
@@ -48,6 +49,7 @@ body{
     right:0;
     text-align: center;
     width:500px;
+    font-size: small;
 }
 
 span.error{
@@ -58,6 +60,7 @@ span.error{
     cursor: pointer;
     text-decoration: none;
     color: #000000;
+    
 }
 .footer-links:hover{
     color: #3399FF;
@@ -78,6 +81,11 @@ table.centered{
 
 td.icon{
     text-align: center;
+    font-size: small;
+}
+
+.modaltxt{
+    font-size: small;
 }
 
 .statbox{
@@ -86,6 +94,7 @@ td.icon{
     border: solid black 1px;
     padding: 20px;
     overflow-x: hidden;
+    font-size: small;
 }
 
 .statTables{

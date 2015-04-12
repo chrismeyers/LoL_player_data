@@ -21,8 +21,8 @@
                 <td class="icon">
                     <h1> 
                         <?php 
-                        echo $userName . "<br /> Level: " .$summLvl;
-                        echo "<br />";
+                        echo $userName . " <br /> Level: " .$summLvl;
+                        echo " <br /> ";
                         switch($regionurl){
                           case("na"):
                               echo "North America";
@@ -96,7 +96,7 @@
                              "</td></tr>");
                     }
 
-                    if($i < sizeof($modes)){
+                    if($i < sizeof($modes)-1){
                         echo "</table><br /><br />";
                         $i++;
                     }
@@ -106,9 +106,7 @@
                 }
             }
             
-            ?>
-                
-            </div>
+            ?></div>
             
             <?php          
             // Recent Matches - Slows down site due to API throttling.
@@ -119,10 +117,7 @@
                     . " - " . ${'recentMatch'.$match}["spell1"]
                     . " - " . ${'recentMatch'.$match}["spell2"];
                 echo "<br />";
-            }
-            */
-            ?>
-        </div>
+            }*/?></div>
         
         <?php include 'footer.php'; ?>
         

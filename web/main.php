@@ -76,22 +76,23 @@
                 echo "<div style='text-align: center;'>No player stats found.</div>"; 
             }
             else{
-                $i = 1;
+                $i = 0;
+                $modes = $translator->translateAllModes($modes);
                 //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
                     echo "<table class='statTables'>";
-                    echo "<div class='mode'>" . $translator->translateModeSummary($currentMode["playerStatSummaryType"]) . "</div>";
+                    echo "<div class='mode'>" . $currentMode["playerStatSummaryType"] . "</div>";
                     echo "<tr class='stats'>" . 
                          "<td class='stat-name-half'>Wins</td>" .
-                         "<td class='stat-value-half'>" . ${$currentMode["playerStatSummaryType"] . 'Wins'} .
+                         "<td class='stat-value-half'>" . $currentMode["wins"] .
                          "</td></tr>";
 
-                    $currentStatArray = ${$currentMode["playerStatSummaryType"] . 'Stats'};
+                    $currentStatArray = $currentMode["aggregatedStats"];
                     foreach($currentStatArray as $currentStat){
                         echo preg_replace('/(?!^)[[:upper:]]+/',' \0', 
                              "<tr class='stats'><td class='stat-name-half'>" . 
-                             ucfirst(array_search($currentStat, ${$currentMode["playerStatSummaryType"] . 'Stats'})) .
-                             "</td> <td class='stat-value-half'>" . $currentStat . 
+                             ucfirst(array_search($currentStat, $currentStatArray)) .
+                             "</td> <td class='stat-value-half'>" . number_format($currentStat) .
                              "</td></tr>");
                     }
 

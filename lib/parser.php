@@ -105,35 +105,6 @@ for($s = 0; $s < sizeof($seasons); $s++){
     }
 }
 
-//echo "<br />";
-//echo "<pre>"; var_dump($modes); echo "</pre>";
-//echo "<br /><br />";
-
-//Generate variable with stats for all modes
-foreach($modes as $mode){
-    $currentModeIndex = array_search($mode, $modes);
-    $currentModeStatValues = $modes[$currentModeIndex]["aggregatedStats"];
-    $currentModeName = $modes[$currentModeIndex]["playerStatSummaryType"];
-    
-    //Mode stat arrays
-    ${$currentModeName . 'Stats'} = array();
-    
-    //Mode win variable
-    ${$currentModeName . 'Wins'} = $modes[$currentModeIndex]["wins"];
-    
-    foreach($currentModeStatValues as $stat){
-        //Get Current stat name from array
-        $currentStatName = array_search($stat, $currentModeStatValues);
-        //Add entry to current gamemode array
-        ${$currentModeName . 'Stats'}[$currentStatName] = $stat;
-    }
-    //echo "<pre>"; var_dump(${$mode . 'Stats'}); echo "</pre>";
-    //echo "<br />";
-}
-
-//Alphabetize the modes
-sort($modes);
-
 /*
 echo "<br />";
 echo "<pre>"; var_dump($modes); echo "</pre>";

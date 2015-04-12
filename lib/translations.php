@@ -60,6 +60,17 @@ class Translations{
         return $this->gameModeNamesSummary[$rawMode];
     }
     
+    function translateAllModes($allModes){
+        $tempModesArr = array();
+        foreach($allModes as $mode){
+            $translatedName = $this->translateModeSummary($mode["playerStatSummaryType"]);
+            $mode["playerStatSummaryType"] = $translatedName;
+            array_push($tempModesArr, $mode);
+        }
+        sort($tempModesArr);
+        return $tempModesArr;
+    }
+    
     function translateModeRecent($rawMode){
         return $this->gameModeNamesRecent[$rawMode];
     }

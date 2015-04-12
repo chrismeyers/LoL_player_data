@@ -3,9 +3,9 @@
 class lolapi{
     private $summonerdataurl = "/v1.4/summoner/by-name/";
     private $championdataurl = "/v1.2/champion";
-    private $statsurl = "/v1.3/stats/by-summoner/";
-    private $gameurl = "/v1.3/game/by-summoner/";
-    private $spellsurl = "/v1.2/summoner-spell/";
+    private $statsurl = "/v1.3/stats/by-summoner";
+    private $gameurl = "/v1.3/game/by-summoner";
+    private $spellsurl = "/v1.2/summoner-spell";
     private $staticdataurl = "/static-data";
     private $recenturl = "/recent";
     private $summarystatsurl = "/summary";
@@ -61,10 +61,6 @@ class lolapi{
         return $this->summonerdataurl;
     }
     
-    public function getSummNameFromId($baseurl, $id, $region){
-        // $name = @file_get_contents($baseurl . );
-    }
-    
     public function getChampionDataUrl(){
         return $this->championdataurl;
     }
@@ -110,8 +106,11 @@ class lolapi{
      * corresponding to the HTTP response is returned.
      */
     public function getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey){
-        $jsonSumm = @file_get_contents($baseurl . $summonerdataurl . $summoner . 
-                                       $apikey);  //summoner query
+        $jsonSumm = @file_get_contents($baseurl 
+                                       . $summonerdataurl 
+                                       . $summoner 
+                                       . $apikey);  //summoner query
+        
         $http_code = $this->error($http_response_header);
         if($http_code == NULL){
             return $jsonSumm;
@@ -119,28 +118,36 @@ class lolapi{
         else{
             return $http_code;
         }
-        
+    
     }
     
     //=========Stat summary=========
-    public function getStatSummary($baseurl, $currentSummId, $apikey, $season){
-        return @file_get_contents($baseurl . $this->statsurl . $currentSummId 
-                                           . $this->summarystatsurl . $apikey 
+    public function getStatSummary($baseurl, $currentSummId, $apikey, $season){ 
+        return @file_get_contents($baseurl . $this->statsurl . "/" 
+                                           . $currentSummId 
+                                           . $this->summarystatsurl 
+                                           . $apikey 
                                            . "&season=" . $season); 
     }
     
     //=========Static Data=========
-    //Does NOT count towards query limit
+        //Does NOT count towards query limit
     public function getChampionData($baseurl, $region, $champId, $apikey){
-        return @file_get_contents($baseurl . $this->staticdataurl . "/" . $region
-                                           . $this->championdataurl . "/" 
-                                           . $champId . $apikey); 
+        return @file_get_contents($baseurl 
+                                  . $this->staticdataurl . "/" 
+                                  . $region
+                                  . $this->championdataurl . "/" 
+                                  . $champId 
+                                  . $apikey); 
     }
     
     public function getSpellName($region, $id, $apikey){
-        $spellJson = @file_get_contents($this->buildStaticBaseUrl($region) .
-                                        $this->staticdataurl . "/" .$region .
-                                        $this->spellsurl . $id . $apikey);
+        $spellJson = @file_get_contents($this->buildStaticBaseUrl($region) 
+                                        . $this->staticdataurl . "/" 
+                                        . $region 
+                                        . $this->spellsurl . "/" 
+                                        . $id 
+                                        . $apikey);
         $spellArr = $this->jsonToArray($spellJson);
         
         return $spellArr["name"];
@@ -148,8 +155,11 @@ class lolapi{
     
     //=========Recent games=========
     public function getRecentGames($baseurl, $currentSummId, $apikey){
-        return @file_get_contents($baseurl . $this->gameurl . $currentSummId
-                                           . $this->recenturl . $apikey);
+        return @file_get_contents($baseurl 
+                                  . $this->gameurl . "/" 
+                                  . $currentSummId
+                                  . $this->recenturl 
+                                  . $apikey);
     }
     
     //=========JSON conversion=========

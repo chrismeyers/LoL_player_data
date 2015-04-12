@@ -80,7 +80,7 @@ class Translations{
             return "Blue Team";
         }
         else{
-            return "Purple Team";
+            return "Red Team";
         }
     }
 }

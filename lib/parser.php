@@ -61,9 +61,17 @@ for($s = 0; $s < sizeof($seasons); $s++){
             $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
             $found = FALSE;
 
+            //The following modes appeared in multiple seasons and require a suffix
+            //to remove ambiguity.
+            
             //URF 2015
             if((strcmp($newMode, "URF") == 0 || strcmp($newMode, "URFBots") == 0) && strcmp($season, "SEASON2015") == 0){
                 $newMode .= "2015";
+                $found = TRUE;
+            }
+            //Hexakill TT with Bans
+            else if(strcmp($newMode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
+                $newMode .= "TTBans";
                 $found = TRUE;
             }
 
@@ -77,7 +85,10 @@ for($s = 0; $s < sizeof($seasons); $s++){
             //A previous season, only push featured modes.
             $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
             $found = FALSE;
-
+            
+            //The following modes appeared in multiple seasons and require a suffix
+            //to remove ambiguity.
+            
             //One for all orginal
             if(strcmp($newMode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
                 $newMode .= "Vanilla";
@@ -93,12 +104,17 @@ for($s = 0; $s < sizeof($seasons); $s++){
                 $newMode .= "2014";
                 $found = TRUE;
             }
+            //Hexakill TT original
+            else if(strcmp($newMode, "Hexakill") == 0 && strcmp($season, "SEASON2014") == 0){
+                $newMode .= "TTOriginal";
+                $found = TRUE;
+            }
 
             if($found){
                 ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
             }
 
-            if($featured->isFeaturedMode($newMode) || $found){
+            if($found || $featured->isFeaturedMode($newMode)){
                 array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
             }
         }

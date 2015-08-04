@@ -30,7 +30,8 @@ class Translations{
         "URFBots2015" => "Ultra Rapid Fire (URF) Bots 2015",
         "Ascension" => "Ascension",
         "KingPoro" => "Legend of the Poro King",
-        "CounterPick" => "Nemesis Draft"
+        "CounterPick" => "Nemesis Draft",
+        "Bilgewater" => "Black Market Brawlers"
     );
     
     private $gameModeNamesRecent = array(

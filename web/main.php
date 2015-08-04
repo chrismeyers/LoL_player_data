@@ -104,7 +104,7 @@
                         $i++;
                     }
                     else{
-                        echo "</table><br />";
+                        echo "</table>";
                     }   
                 }
             }

@@ -94,6 +94,11 @@ and open the template in the editor.
         padding-top: 12px;
     }
 
+    .summoner-input {
+        margin-top: 75px;
+        text-align: center;
+    }
+
     .modaltxt{
         font-size: small;
     }

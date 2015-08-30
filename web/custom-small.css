@@ -80,10 +80,11 @@ and open the template in the editor.
         
     }
     
-    .summoner-icon{
-        
+    .summoner-input {
+        margin-top: 75px;
+        text-align: center;
     }
-
+    
     .modaltxt{
         font-size: small;
     }

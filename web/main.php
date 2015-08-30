@@ -120,7 +120,12 @@
                     . " - " . ${'recentMatch'.$match}["spell1"]
                     . " - " . ${'recentMatch'.$match}["spell2"];
                 echo "<br />";
-            }*/?></div>
+            }*/?>
+                <div class="summoner-input">
+                  <?php include 'summonerForm.php' ?>
+                </div>
+            
+            </div>
         
         <?php include 'footer.php'; ?>
         

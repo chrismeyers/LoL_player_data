@@ -63,15 +63,10 @@ for($s = 0; $s < sizeof($seasons); $s++){
 
             //The following modes appeared in multiple seasons and require a suffix
             //to remove ambiguity.
+            //  - URF, URFBots, Hexakill
             
-            //URF 2015
-            if((strcmp($newMode, "URF") == 0 || strcmp($newMode, "URFBots") == 0) && strcmp($season, "SEASON2015") == 0){
-                $newMode .= "2015";
-                $found = TRUE;
-            }
-            //Hexakill TT with Bans
-            else if(strcmp($newMode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
-                $newMode .= "TTBans";
+            if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
+                $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
                 $found = TRUE;
             }
 
@@ -79,6 +74,7 @@ for($s = 0; $s < sizeof($seasons); $s++){
                 ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
             }
 
+            // Push all the modes for the current season.gameModeNamesSummary
             array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
         }
         else{
@@ -88,33 +84,20 @@ for($s = 0; $s < sizeof($seasons); $s++){
             
             //The following modes appeared in multiple seasons and require a suffix
             //to remove ambiguity.
+            //  - OneForAll5x5, URF, URFBots, Hexakill
             
-            //One for all orginal
-            if(strcmp($newMode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
-                $newMode .= "Vanilla";
-                $found = TRUE;
-            }
-            //One for all mirror
-            else if(strcmp($newMode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2014") == 0){
-                $newMode .= "Mirror";
-                $found = TRUE;
-            }
-            //URF 2014
-            else if((strcmp($newMode, "URF") == 0 || strcmp($newMode, "URFBots") == 0) && strcmp($season, "SEASON2014") == 0){
-                $newMode .= "2014";
-                $found = TRUE;
-            }
-            //Hexakill TT original
-            else if(strcmp($newMode, "Hexakill") == 0 && strcmp($season, "SEASON2014") == 0){
-                $newMode .= "TTOriginal";
+            if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
+                $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
                 $found = TRUE;
             }
 
             if($found){
+                // Add mode back into mode array with new name. 
                 ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
             }
 
             if($found || $featured->isFeaturedMode($newMode)){
+                // Only push the featured modes.
                 array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
             }
         }

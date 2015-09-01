@@ -8,12 +8,7 @@ $regionurl = $lolapi->getRegion($_GET['region']);
 
 //=========Core url data=========
 $baseurl = $lolapi->buildBaseUrl($regionurl);
-$staticbaseurl = $lolapi->buildStaticBaseUrl($regionurl);
 $summonerdataurl = $lolapi->getSummonerDataUrl();
-$championdataurl = $lolapi->getChampionDataUrl();
-$statsurl = $lolapi->getStatsUrl();
-$summarystatsurl = $lolapi->getSummaryStatsUrl();
-$rankedstatsurl = $lolapi->getRankedStatsUrl();
 $apikey = $lolapi->buildApiKeyUrl();
 
 //=========Parsing user data=========

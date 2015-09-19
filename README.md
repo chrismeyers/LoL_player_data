@@ -5,6 +5,8 @@ This is a summer project that I am working on based on the video game *League of
 Currently, you can enter a player name and various information about this player will be parsed and presented to you.  This information includes: summoner name, level, region, icon and a listing of all game mode stats
 that the player has earned.
 
+[Demo](http://chrismeyers.info/projects/LoL_player_data/web/main.php?name=Spicy+Criticals&region=na)
+
 ##Usage:
 
 1. Create a folder in the root directory named 'notes'.

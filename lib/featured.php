@@ -6,10 +6,7 @@ class Featured{
         "OneForAll5x5", "FirstBlood1x1", "FirstBlood2x2", "Bilgewater");
 
     private $dupeFeaturedModes = array(
-        "OneForAll5x5",
-        "URF",
-        "URFBots",
-        "Hexakill");
+        "OneForAll5x5", "URF", "URFBots", "Hexakill");
 
     public function getDupeFeaturedModesArr() {
         return $this->dupeFeaturedModes;
@@ -25,7 +22,7 @@ class Featured{
     public function filterDupeFeaturedModes($newmode, $season) {
         //One for all orginal
         if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
-            return $newmode . "Vanilla";
+            return $newmode . "Original";
         }
         //One for all mirror
         else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2014") == 0){
@@ -46,6 +43,10 @@ class Featured{
         //Hexakill TT with Bans
         else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
             return $newmode . "TTBans";
+        }
+        //Hexakill TT with Bans
+        else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2015") == 0){
+            return $newmode . "2015";
         }
     }
 }

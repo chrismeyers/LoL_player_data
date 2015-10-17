@@ -99,11 +99,9 @@ for($s = 0; $s < sizeof($seasons); $s++){
     }
 }
 
-/*
-echo "<br />";
-echo "<pre>"; var_dump($modes); echo "</pre>";
-echo "<br /><br />";
-*/
+//echo "<br />";
+//echo "<pre>"; var_dump($modes); echo "</pre>";
+//echo "<br /><br />";
 
 /*
 //=========Current player recent games=========

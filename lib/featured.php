@@ -44,7 +44,7 @@ class Featured{
         else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
             return $newmode . "TTBans";
         }
-        //Hexakill TT with Bans
+        //One for all 2015
         else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2015") == 0){
             return $newmode . "2015";
         }

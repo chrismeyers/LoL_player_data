@@ -1,7 +1,13 @@
 <?php
 include '../lib/lolapi.php';
 include '../lib/featured.php';
+include 'translations.php';
+
+$DEBUG_FLAG = 0;
+
+$translator = new Translations();
 $lolapi = new lolapi();
+$featured = new Featured();
 
 //=========Determine region=========
 $regionurl = $lolapi->getRegion($_GET['region']);
@@ -24,9 +30,10 @@ if(in_array($jsonSumm, $lolapi->possibleErrors())){
 $objSummArr = $lolapi->jsonToArray($jsonSumm);
 
 //Returned json and converted array
-//echo $jsonSumm;
-//echo "<br />";
-//echo "<pre>"; var_dump($objSummArr); echo "</pre>";
+if($DEBUG_FLAG){
+    //echo $jsonSumm;
+    $lolapi->varDump($objSummArr);
+}
 
 //Save user data to vars
 $currentSummId = $lolapi->getSummonerId($objSummArr, $summoner);
@@ -35,11 +42,13 @@ $summLvl = $lolapi->getSummonerLevel($objSummArr, $summoner);
 $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 
-//echo "<br /><br />";
 //=========Current player stat summary=========
-$seasons = array("SEASON3", "SEASON2014", "SEASON2015");  //ADD NEW SEASONS TO END OF THIS ARRAY
+$seasons = $translator->getSeasonKeys();
 $modes = array();
-$featured = new Featured();
+
+if($DEBUG_FLAG){
+    $lolapi->varDump($seasons);
+}
 
 for($s = 0; $s < sizeof($seasons); $s++){
     $season = $seasons[$s];
@@ -51,57 +60,43 @@ for($s = 0; $s < sizeof($seasons); $s++){
     
     
     for($i = 0; $i < ${"gameModes" . $season}; $i++){
-        if($s == sizeof($seasons)-1){
-            //Current season, push all data
-            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
-            $found = FALSE;
+        $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
+        $found = FALSE;
 
-            //The following modes appeared in multiple seasons and require a suffix
-            //to remove ambiguity.
-            //  - URF, URFBots, Hexakill
-            
-            if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
-                $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
-                $found = TRUE;
-            }
-
-            if($found){
-                ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
-            }
-
-            // Push all the modes for the current season.gameModeNamesSummary
-            array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
+        //The following modes appeared in multiple seasons and require a suffix
+        //to remove ambiguity.
+        //  - OneForAll5x5, URF, URFBots, Hexakill
+        
+        if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
+            $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
+            $found = TRUE;
         }
-        else{
-            //A previous season, only push featured modes.
-            $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
-            $found = FALSE;
-            
-            //The following modes appeared in multiple seasons and require a suffix
-            //to remove ambiguity.
-            //  - OneForAll5x5, URF, URFBots, Hexakill
-            
-            if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
-                $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
-                $found = TRUE;
-            }
 
-            if($found){
-                // Add mode back into mode array with new name. 
-                ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
-            }
+        //The following modes are ranked and should be stored separately by SEASON.
+        //  - RankedPremade3x3, RankedPremade5x5, RankedSolo5x5,
+        //    RankedTeam3x3, RankedTeam5x5
+        if(in_array($newMode, $featured->getRankedModesArr())) {
+            $newMode = $featured->filterRankedModes($newMode, $season);
+            $found = TRUE;
+        }
 
-            if($found || $featured->isFeaturedMode($newMode)){
-                // Only push the featured modes.
-                array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
-            }
+        if($found){
+            // Add mode back into mode array with new name. 
+            ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
+        }
+
+        //If current season, push all modes.
+        //If duplicate mode type ($found == true), push mode
+        //If ranked mode or featured mode, push mode
+        if($s == sizeof($seasons)-1 || $found || $featured->isFeaturedMode($newMode)){
+            array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
         }
     }
 }
 
-//echo "<br />";
-//echo "<pre>"; var_dump($modes); echo "</pre>";
-//echo "<br /><br />";
+if($DEBUG_FLAG){
+    $lolapi->varDump($modes);
+}
 
 /*
 //=========Current player recent games=========
@@ -110,9 +105,10 @@ $recentGamesUrl = $lolapi->getRecentGames($baseurl, $currentSummId, $apikey);
 $objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
 
 //Returned recent games json and converted array
-//echo $recentGamesUrl;
-//echo "<br />";
-//echo "<pre>"; var_dump($objRecentGamesArr); echo "</pre>";
+if($DEBUG_FLAG){
+    //echo $recentGamesUrl;
+    $lolapi->varDump($objRecentGamesArr);
+} 
 
 for($i = 0; $i < 10; $i++){
     ${'recentMatch' . $i} = array();
@@ -121,9 +117,10 @@ for($i = 0; $i < 10; $i++){
     $objStaticChampArr = $lolapi->jsonToArray($staticChampData);
 
     //Returned recent games json and converted array
-    //echo $recentGamesUrl;
-    //echo "<br />";
-    //echo "<pre>"; var_dump($objStaticChampArr); echo "</pre>";
+    if($DEBUG_FLAG){
+        //echo $recentGamesUrl;
+        $lolapi->varDump($objStaticChampArr);
+    }
      
     ${'recentMatch' . $i}["champName"] = $objStaticChampArr["name"];
     ${'recentMatch' . $i}["mode"] = $objRecentGamesArr["games"][$i]["subType"]; //needs to be translated

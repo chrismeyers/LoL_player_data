@@ -6,28 +6,48 @@ class Translations{
         "CoopVsAI3x3" => "Coop vs AI 3v3",
         "NightmareBot" => "Doom Bots of Doom",
         "OdinUnranked" => "Dominion",
-        "RankedPremade3x3" => "Ranked Premade 3v3",
-        "RankedPremade5x5" => "Ranked Premade 5v5",
-        "RankedSolo5x5" => "Ranked Solo/Duo",
-        "RankedTeam3x3" => "Ranked Teams 3v3",
-        "RankedTeam5x5" => "Ranked Teams 5v5",
+
+        "RankedPremade3x3_SEASON3" => "Ranked Premade 3v3 " . "Season 3",
+        "RankedPremade5x5_SEASON3" => "Ranked Premade 5v5 " . "Season 3",
+        "RankedSolo5x5_SEASON3" => "Ranked Solo/Duo " . "Season 3",
+        "RankedTeam3x3_SEASON3" => "Ranked Teams 3v3 " . "Season 3",
+        "RankedTeam5x5_SEASON3" => "Ranked Teams 5v5 " . "Season 3",
+
+        "RankedPremade3x3_SEASON2014" => "Ranked Premade 3v3 " . "Season 4",
+        "RankedPremade5x5_SEASON2014" => "Ranked Premade 5v5 " . "Season 4",
+        "RankedSolo5x5_SEASON2014" => "Ranked Solo/Duo " . "Season 4",
+        "RankedTeam3x3_SEASON2014" => "Ranked Teams 3v3 " . "Season 4",
+        "RankedTeam5x5_SEASON2014" => "Ranked Teams 5v5 " . "Season 4",
+
+        "RankedPremade3x3_SEASON2015" => "Ranked Premade 3v3 " . "Season 5",
+        "RankedPremade5x5_SEASON2015" => "Ranked Premade 5v5 " . "Season 5",
+        "RankedSolo5x5_SEASON2015" => "Ranked Solo/Duo " . "Season 5",
+        "RankedTeam3x3_SEASON2015" => "Ranked Teams 3v3 " . "Season 5",
+        "RankedTeam5x5_SEASON2015" => "Ranked Teams 5v5 " . "Season 5",
+
+        "RankedPremade3x3_SEASON2016" => "Ranked Premade 3v3 " . "Season 6",
+        "RankedPremade5x5_SEASON2016" => "Ranked Premade 5v5 " . "Season 6",
+        "RankedSolo5x5_SEASON2016" => "Ranked Solo/Duo " . "Season 6",
+        "RankedTeam3x3_SEASON2016" => "Ranked Teams 3v3 " . "Season 6",
+        "RankedTeam5x5_SEASON2016" => "Ranked Teams 5v5 " . "Season 6",
+
         "Unranked" => "Normal 5v5",
         "Unranked3x3" => "Normal 3v3",
-        "OneForAll5x5Original" => "One for All: Original",
-        "OneForAll5x5Mirror" => "One for All: Mirror",
-        "OneForAll5x52015" => "One for All: 2015",
+        "OneForAll5x5_Original" => "One for All: Original",
+        "OneForAll5x5_Mirror" => "One for All: Mirror",
+        "OneForAll5x5_2015" => "One for All: 2015",
         "FirstBlood1x1" =>  "First Blood 1v1",
         "FirstBlood2x2" => "First Blood 2v2", 
         "SummonersRift6x6" => "Hexakill: Summoner's Rift",
-        "HexakillTTOriginal" => "Hexakill: Twisted Treeline, Original",
-        "HexakillTTBans" => "Hexakill: Twisted Treeline, with Bans",
+        "Hexakill_TT_Original" => "Hexakill: Twisted Treeline, Original",
+        "Hexakill_TT_Bans" => "Hexakill: Twisted Treeline, with Bans",
         "CAP5x5" => "Team Builder",
         "URF" => "Ultra Rapid Fire (URF)",
         "URFBots" => "Ultra Rapid Fire (URF) Bots",
-        "URF2014" => "Ultra Rapid Fire (URF) 2014",
-        "URFBots2014" => "Ultra Rapid Fire (URF) Bots 2014",
-        "URF2015" => "Ultra Rapid Fire (URF) 2015",
-        "URFBots2015" => "Ultra Rapid Fire (URF) Bots 2015",
+        "URF_2014" => "Ultra Rapid Fire (URF) 2014",
+        "URFBots_2014" => "Ultra Rapid Fire (URF) Bots 2014",
+        "URF_2015" => "Ultra Rapid Fire (URF) 2015",
+        "URFBots_2015" => "Ultra Rapid Fire (URF) Bots 2015",
         "Ascension" => "Ascension",
         "KingPoro" => "Legend of the Poro King",
         "CounterPick" => "Nemesis Draft",
@@ -57,9 +77,24 @@ class Translations{
         "NIGHTMARE_BOT" => "Doom Bots of Doom",
         "ASCENSION_5x5" => "Ascension"
     );
+
+    private $seasons = array(
+        "SEASON3" => "Season 3",
+        "SEASON2014" => "Season 4",
+        "SEASON2015" => "Season 5",
+        "SEASON2016" => "Season 6"
+    );
     
     function translateModeSummary($rawMode){
         return $this->gameModeNamesSummary[$rawMode];
+    }
+
+    function translateModeRecent($rawMode){
+        return $this->gameModeNamesRecent[$rawMode];
+    }
+
+    function translateSeason($rawMode){
+        return $this->seasons[$rawMode];
     }
     
     function translateAllModes($allModes){
@@ -72,11 +107,7 @@ class Translations{
         sort($tempModesArr);
         return $tempModesArr;
     }
-    
-    function translateModeRecent($rawMode){
-        return $this->gameModeNamesRecent[$rawMode];
-    }
-    
+        
     function translateTeam($teamCode){
         if($teamCode === 100){
             return "Blue Team";
@@ -84,5 +115,9 @@ class Translations{
         else{
             return "Red Team";
         }
+    }
+
+    function getSeasonKeys(){
+        return array_keys($this->seasons);
     }
 }

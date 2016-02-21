@@ -202,4 +202,10 @@ class lolapi{
         return $code;
     }
     
+    //=============DEBUG==============
+    public function varDump($var){
+        echo "<br />";
+        echo "<pre>"; var_dump($var); echo "</pre>";
+        echo "<br /><br />";
+    }
 }

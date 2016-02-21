@@ -1,4 +1,4 @@
-<?php include '../lib/parser.php'; include '../lib/translations.php';?>
+<?php include '../lib/parser.php';?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -81,7 +81,6 @@
             else{
                 $i = 0;
                 $modes = $translator->translateAllModes($modes);
-                //echo $AramUnranked5x5Wins . " " . $AramUnranked5x5Stats['totalChampionKills'] . "<br />";
                 foreach($modes as $currentMode){
                     echo "<table class='statTables'>";
                     echo "<div class='mode'>" . $currentMode["playerStatSummaryType"] . "</div>";

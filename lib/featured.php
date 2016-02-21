@@ -8,12 +8,27 @@ class Featured{
     private $dupeFeaturedModes = array(
         "OneForAll5x5", "URF", "URFBots", "Hexakill");
 
+    private $rankedModes = array(
+        "RankedPremade3x3", "RankedPremade5x5", "RankedSolo5x5",
+        "RankedTeam3x3", "RankedTeam5x5");
+
     public function getDupeFeaturedModesArr() {
         return $this->dupeFeaturedModes;
     }
     
-    public function isFeaturedMode($modeCheck){
-        if(in_array($modeCheck, $this->featuredmodes)){
+    public function getRankedModesArr() {
+        return $this->rankedModes;
+    }
+
+    public function isFeaturedMode($modeToCheck){
+        if(in_array($modeToCheck, $this->featuredmodes)){
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    public function isRankedMode($modeToCheck){
+        if(in_array($modeToCheck, $this->rankedModes)){
             return TRUE;
         }
         return FALSE;
@@ -22,31 +37,35 @@ class Featured{
     public function filterDupeFeaturedModes($newmode, $season) {
         //One for all orginal
         if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
-            return $newmode . "Original";
+            return $newmode . "_Original";
         }
         //One for all mirror
         else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "Mirror";
+            return $newmode . "_Mirror";
         }
         //URF 2014
         else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "2014";
+            return $newmode . "_2014";
         }
         //Hexakill TT original
         else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "TTOriginal";
+            return $newmode . "_TT_Original";
         }
         //URF 2015
         else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "2015";
+            return $newmode . "_2015";
         }
         //Hexakill TT with Bans
         else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "TTBans";
+            return $newmode . "_TT_Bans";
         }
         //One for all 2015
         else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "2015";
+            return $newmode . "_2015";
         }
+    }
+
+    public function filterRankedModes($newmode, $season){
+        return $newmode . "_" . $season;
     }
 }

@@ -27,18 +27,18 @@ if(in_array($jsonSumm, $lolapi->possibleErrors())){
     exit();
 }
 
-$objSummArr = $lolapi->jsonToArray($jsonSumm);
+$summArr = $lolapi->jsonToArray($jsonSumm);
 
 //Returned json and converted array
 if($DEBUG_FLAG){
     //echo $jsonSumm;
-    $lolapi->varDump($objSummArr);
+    $lolapi->varDump($summArr);
 }
 
 //Save user data to vars
-$currentSummId = $lolapi->getSummonerId($objSummArr, $summoner);
-$userName = $lolapi->getFormattedName($objSummArr, $summoner);
-$summLvl = $lolapi->getSummonerLevel($objSummArr, $summoner);
+$currentSummId = $lolapi->getSummonerId($summArr, $summoner);
+$userName = $lolapi->getFormattedName($summArr, $summoner);
+$summLvl = $lolapi->getSummonerLevel($summArr, $summoner);
 $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 
 
@@ -53,14 +53,13 @@ if($DEBUG_FLAG){
 for($s = 0; $s < sizeof($seasons); $s++){
     $season = $seasons[$s];
 
-    ${"jsonStatSummary" . $season} = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, $season);
-    ${"objNormStatsArr" . $season} = $lolapi->jsonToArray(${"jsonStatSummary" . $season});
+    $currentjsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, $season);
+    $currentNormStatsArr = $lolapi->jsonToArray($currentjsonStatSummary);
     
-    ${"gameModes" . $season} = sizeof(${"objNormStatsArr" . $season}["playerStatSummaries"]);
+    $currentSeasonNumGameModes = sizeof($currentNormStatsArr["playerStatSummaries"]);
     
-    
-    for($i = 0; $i < ${"gameModes" . $season}; $i++){
-        $newMode = ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"];
+    for($i = 0; $i < $currentSeasonNumGameModes; $i++){
+        $newMode = $currentNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
         $found = FALSE;
 
         //The following modes appeared in multiple seasons and require a suffix
@@ -82,14 +81,14 @@ for($s = 0; $s < sizeof($seasons); $s++){
 
         if($found){
             // Add mode back into mode array with new name. 
-            ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
+            $currentNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
         }
 
         //If current season, push all modes.
         //If duplicate mode type ($found == true), push mode
         //If ranked mode or featured mode, push mode
         if($s == sizeof($seasons)-1 || $found || $featured->isFeaturedMode($newMode)){
-            array_push($modes, ${"objNormStatsArr" . $season}["playerStatSummaries"][$i]);
+            array_push($modes, $currentNormStatsArr["playerStatSummaries"][$i]);
         }
     }
 }

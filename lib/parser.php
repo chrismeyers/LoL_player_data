@@ -1,6 +1,6 @@
 <?php
-include '../lib/lolapi.php';
-include '../lib/featured.php';
+include 'lolapi.php';
+include 'featured.php';
 include 'translations.php';
 
 $DEBUG_FLAG = 0;

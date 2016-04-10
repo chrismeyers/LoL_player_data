@@ -6,7 +6,7 @@ class Featured{
         "OneForAll5x5", "FirstBlood1x1", "FirstBlood2x2", "Bilgewater");
 
     private $dupeFeaturedModes = array(
-        "OneForAll5x5", "URF", "URFBots", "Hexakill");
+        "OneForAll5x5", "URF", "URFBots", "Hexakill", "Ascension");
 
     private $rankedModes = array(
         "RankedPremade3x3", "RankedPremade5x5", "RankedSolo5x5",
@@ -62,6 +62,14 @@ class Featured{
         //One for all 2015
         else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2015") == 0){
             return $newmode . "_2015";
+        }
+        //Ascension Shurima Event
+        else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2014") == 0){
+            return $newmode . "_Original";
+        }
+        //Ascension Rotating 2016
+        else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2016") == 0){
+            return $newmode . "_2016";
         }
     }
 

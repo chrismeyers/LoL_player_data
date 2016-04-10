@@ -2,44 +2,17 @@
 
 class lolapi{
     private $summonerdataurl = "/v1.4/summoner/by-name/";
-    private $championdataurl = "/v1.2/champion";
-    private $statsurl = "/v1.3/stats/by-summoner";
-    private $gameurl = "/v1.3/game/by-summoner";
-    private $spellsurl = "/v1.2/summoner-spell";
-    private $staticdataurl = "/static-data";
-    private $recenturl = "/recent";
-    private $summarystatsurl = "/summary";
-    private $rankedstatsurl = "/ranked";
+    private $championdataurl = "/v1.2/champion/";
+    private $statsurl = "/v1.3/stats/by-summoner/";
+    private $gameurl = "/v1.3/game/by-summoner/";
+    private $spellsurl = "/v1.2/summoner-spell/";
+    private $staticdataurl = "/static-data/";
+    private $recenturl = "/recent/";
+    private $summarystatsurl = "/summary/";
+    private $rankedstatsurl = "/ranked/";
     private $apikeytext = "?api_key=";
     
     //=========Background player data=========
-    public function getRegion($region){
-        switch(strtolower($region)){
-            case "na":
-                return "na";
-            case "euw":
-                return "euw";
-            case "eune":
-                return "eune";
-            case "br":
-                return "br";
-            case "kr":
-                return "kr";
-            case "lan":
-                return "lan";
-            case "las":
-                return "las";
-            case "oce":
-                return "oce";
-            case "ru":
-                return "ru";
-            case "tr":
-                return "tr";
-            default:
-                return "???";
-        }
-    }
-    
     public function buildBaseUrl($region){
         return "https://" . $region . ".api.pvp.net/api/lol/" . $region;
     }
@@ -123,7 +96,7 @@ class lolapi{
     
     //=========Stat summary=========
     public function getStatSummary($baseurl, $currentSummId, $apikey, $season){ 
-        return @file_get_contents($baseurl . $this->statsurl . "/" 
+        return @file_get_contents($baseurl . $this->statsurl 
                                            . $currentSummId 
                                            . $this->summarystatsurl 
                                            . $apikey 
@@ -132,20 +105,20 @@ class lolapi{
     
     //=========Static Data=========
         //Does NOT count towards query limit
-    public function getChampionData($baseurl, $region, $champId, $apikey){
-        return @file_get_contents($baseurl 
-                                  . $this->staticdataurl . "/" 
+    public function getChampionData($region, $champId, $apikey){
+        return @file_get_contents($this->buildStaticBaseUrl($region)  
+                                  . $this->staticdataurl 
                                   . $region
-                                  . $this->championdataurl . "/" 
+                                  . $this->championdataurl
                                   . $champId 
                                   . $apikey); 
     }
     
     public function getSpellName($region, $id, $apikey){
         $spellJson = @file_get_contents($this->buildStaticBaseUrl($region) 
-                                        . $this->staticdataurl . "/" 
+                                        . $this->staticdataurl
                                         . $region 
-                                        . $this->spellsurl . "/" 
+                                        . $this->spellsurl 
                                         . $id 
                                         . $apikey);
         $spellArr = $this->jsonToArray($spellJson);
@@ -156,7 +129,7 @@ class lolapi{
     //=========Recent games=========
     public function getRecentGames($baseurl, $currentSummId, $apikey){
         return @file_get_contents($baseurl 
-                                  . $this->gameurl . "/" 
+                                  . $this->gameurl
                                   . $currentSummId
                                   . $this->recenturl 
                                   . $apikey);

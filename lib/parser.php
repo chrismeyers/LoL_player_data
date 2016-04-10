@@ -10,7 +10,7 @@ $lolapi = new lolapi();
 $featured = new Featured();
 
 //=========Determine region=========
-$regionurl = $lolapi->getRegion($_GET['region']);
+$regionurl = $_GET['region'];
 
 //=========Core url data=========
 $baseurl = $lolapi->buildBaseUrl($regionurl);
@@ -31,7 +31,6 @@ $summArr = $lolapi->jsonToArray($jsonSumm);
 
 //Returned json and converted array
 if($DEBUG_FLAG){
-    //echo $jsonSumm;
     $lolapi->varDump($summArr);
 }
 
@@ -64,8 +63,7 @@ for($s = 0; $s < sizeof($seasons); $s++){
 
         //The following modes appeared in multiple seasons and require a suffix
         //to remove ambiguity.
-        //  - OneForAll5x5, URF, URFBots, Hexakill
-        
+        //  - OneForAll5x5, URF, URFBots, Hexakill, Ascension    
         if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
             $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
             $found = TRUE;
@@ -112,7 +110,7 @@ if($DEBUG_FLAG){
 for($i = 0; $i < 10; $i++){
     ${'recentMatch' . $i} = array();
     $currentChampId = $objRecentGamesArr["games"][$i]["championId"];
-    $staticChampData = $lolapi->getChampionData($staticbaseurl, $regionurl, $currentChampId, $apikey);
+    $staticChampData = $lolapi->getChampionData($regionurl, $currentChampId, $apikey);
     $objStaticChampArr = $lolapi->jsonToArray($staticChampData);
 
     //Returned recent games json and converted array

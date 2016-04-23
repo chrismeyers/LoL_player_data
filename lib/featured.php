@@ -71,6 +71,10 @@ class Featured{
         else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2016") == 0){
             return $newmode . "_2016";
         }
+        //URF 2016
+        else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2016") == 0){
+            return $newmode . "_2016";
+        }
     }
 
     public function filterRankedModes($newmode, $season){

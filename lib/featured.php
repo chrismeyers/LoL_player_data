@@ -71,8 +71,12 @@ class Featured{
         else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2016") == 0){
             return $newmode . "_2016";
         }
-        //URF 2016
+        //URF Rotating 2016
         else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2016") == 0){
+            return $newmode . "_2016";
+        }
+        //Hexakill Rotating 2016
+        else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2016") == 0){
             return $newmode . "_2016";
         }
     }

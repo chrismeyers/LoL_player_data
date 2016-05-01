@@ -3,7 +3,7 @@ include 'lolapi.php';
 include 'featured.php';
 include 'translations.php';
 
-$DEBUG_FLAG = 0;
+$DEBUG_FLAG = FALSE;
 
 $translator = new Translations();
 $lolapi = new lolapi();
@@ -44,10 +44,7 @@ $currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
 //=========Current player stat summary=========
 $seasons = $translator->getSeasonKeys();
 $modes = array();
-
-if($DEBUG_FLAG){
-    $lolapi->varDump($seasons);
-}
+$statsFound = FALSE;
 
 for($s = 0; $s < sizeof($seasons); $s++){
     $season = $seasons[$s];
@@ -56,6 +53,7 @@ for($s = 0; $s < sizeof($seasons); $s++){
     $currentNormStatsArr = $lolapi->jsonToArray($currentjsonStatSummary);
     
     $currentSeasonNumGameModes = sizeof($currentNormStatsArr["playerStatSummaries"]);
+    $statsFound = ($statsFound || $currentSeasonNumGameModes > 0) ? TRUE : FALSE;
     
     for($i = 0; $i < $currentSeasonNumGameModes; $i++){
         $newMode = $currentNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
@@ -82,12 +80,7 @@ for($s = 0; $s < sizeof($seasons); $s++){
             $currentNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"] = $newMode;
         }
 
-        //If current season, push all modes.
-        //If duplicate mode type ($found == true), push mode
-        //If ranked mode or featured mode, push mode
-        if($s == sizeof($seasons)-1 || $found || $featured->isFeaturedMode($newMode)){
-            array_push($modes, $currentNormStatsArr["playerStatSummaries"][$i]);
-        }
+        $modes[$newMode] = $currentNormStatsArr["playerStatSummaries"][$i];
     }
 }
 

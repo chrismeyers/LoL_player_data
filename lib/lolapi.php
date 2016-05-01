@@ -24,6 +24,33 @@ class lolapi{
     public function buildApiKeyUrl(){
         return $this->apikeytext . file_get_contents('../notes/key.txt');
     }
+
+    public function translateRegion($region){
+        switch($region){
+          case "na":
+              return "North America";
+          case "euw":
+              return "Europe West";
+          case "eune":
+              return "Europe Nordic/East";
+          case "br":
+              return "Brazil";
+          case "kr":
+              return "Korea";
+          case "lan":
+              return "Latin America North";
+          case "las":
+              return "Latin America South";
+          case "oce":
+              return "Oceanic";
+          case "ru":
+              return "Russia";
+          case "tr":
+              return "Turkey";
+          default:
+              return "Somewhere on earth, maybe.";
+        }
+    }
     
     //=========Current player data=========
     public function buildAvatarUrl($region, $name){

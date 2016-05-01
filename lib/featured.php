@@ -35,49 +35,51 @@ class Featured{
     }
 
     public function filterDupeFeaturedModes($newmode, $season) {
-        //One for all orginal
-        if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON3") == 0){
-            return $newmode . "_Original";
-        }
-        //One for all mirror
-        else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "_Mirror";
-        }
-        //URF 2014
-        else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "_2014";
-        }
-        //Hexakill TT original
-        else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "_TT_Original";
-        }
-        //URF 2015
-        else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "_2015";
-        }
-        //Hexakill TT with Bans
-        else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "_TT_Bans";
-        }
-        //One for all 2015
-        else if(strcmp($newmode, "OneForAll5x5") == 0 && strcmp($season, "SEASON2015") == 0){
-            return $newmode . "_2015";
-        }
-        //Ascension Shurima Event
-        else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2014") == 0){
-            return $newmode . "_Original";
-        }
-        //Ascension Rotating 2016
-        else if(strcmp($newmode, "Ascension") == 0 && strcmp($season, "SEASON2016") == 0){
-            return $newmode . "_2016";
-        }
-        //URF Rotating 2016
-        else if((strcmp($newmode, "URF") == 0 || strcmp($newmode, "URFBots") == 0) && strcmp($season, "SEASON2016") == 0){
-            return $newmode . "_2016";
-        }
-        //Hexakill Rotating 2016
-        else if(strcmp($newmode, "Hexakill") == 0 && strcmp($season, "SEASON2016") == 0){
-            return $newmode . "_2016";
+        switch($season){
+            case "SEASON3": {
+                switch($newmode){
+                    case "OneForAll5x5":
+                        return $newmode . "_Original";
+                }
+            }
+            case "SEASON2014": {
+                switch($newmode){
+                    case "OneForAll5x5":
+                        return $newmode . "_Mirror";
+                    case "URF":
+                    case "URFBots":
+                        return $newmode . "_2014";
+                    case "Hexakill":
+                        return $newmode . "_TT_Original";
+                    case "Ascension":
+                        return $newmode . "_Original";
+                }
+            }
+            case "SEASON2015": {
+                switch($newmode){
+                    case "OneForAll5x5":
+                        return $newmode . "_2015";
+                    case "URF":
+                    case "URFBots":
+                        return $newmode . "_2015";
+                    case "Hexakill":
+                        return $newmode . "_TT_Bans";
+                }
+            }
+            case "SEASON2016": {
+                switch($newmode){
+                    case "URF":
+                    case "URFBots":
+                        return $newmode . "_2016";
+                    case "Hexakill":
+                        return $newmode . "_2016";
+                    case "Ascension":
+                        return $newmode . "_2016";
+                }
+            }
+            default: {
+                return "_Kappa";
+            }
         }
     }
 

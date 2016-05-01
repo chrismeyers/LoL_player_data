@@ -26,41 +26,7 @@
                         <?php 
                         echo $userName . " <br /> Level: " .$summLvl;
                         echo " <br /> ";
-                        switch($regionurl){
-                          case("na"):
-                              echo "North America";
-                              break;
-                          case("euw"):
-                              echo "Europe West";
-                              break;
-                          case("eune"):
-                              echo "Europe Nordic/East";
-                              break;
-                          case("br"):
-                              echo "Brazil";
-                              break;
-                          case("kr"):
-                              echo "Korea";
-                              break;
-                          case("lan"):
-                              echo "Latin America North";
-                              break;
-                          case("las"):
-                              echo "Latin America South";
-                              break;
-                          case("oce"):
-                              echo "Oceanic";
-                              break;
-                          case("ru"):
-                              echo "Russia";
-                              break;
-                          case("tr"):
-                              echo "Turkey";
-                              break;
-                          default:
-                              echo "Somewhere on earth, maybe.";
-                              break;
-                        }
+                        echo $lolapi->translateRegion($regionurl);
                         ?> 
                     </h1>
                 </div>
@@ -75,13 +41,13 @@
             $translator = new Translations();
             
             // Stat Summary
-            if(isset($php_errormsg) && strcmp($php_errormsg, "Undefined index: playerStatSummaries") == 0){
-                echo "<div style='text-align: center;'>No player stats found.</div>"; 
+            if(!$statsFound){
+                echo "<div style='text-align: center;'>No player stats found for <b>" . $userName . "</b> on <b>" . strtoupper($regionurl) . "</b>.</div>"; 
             }
             else{
                 $i = 0;
-                $modes = $translator->translateAllModes($modes);
-                foreach($modes as $currentMode){
+                $modesTranslated = $translator->translateAllModes($modes);
+                foreach($modesTranslated as $currentMode){
                     echo "<table class='statTables'>";
                     echo "<div class='mode'>" . $currentMode["playerStatSummaryType"] . "</div>";
                     echo "<tr class='stats'>" . 
@@ -98,7 +64,7 @@
                              "</td></tr>");
                     }
 
-                    if($i < sizeof($modes)-1){
+                    if($i < sizeof($modesTranslated)-1){
                         echo "</table><br /><br />";
                         $i++;
                     }

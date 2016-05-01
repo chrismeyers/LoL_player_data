@@ -216,12 +216,14 @@ and open the template in the editor.
         text-shadow:1px 1px 0px #1570cd;
     }
     .submit-button:hover {
-            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
-            background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
-            /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');*/
-            background-color:#1e62d0;
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+        background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+        /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');*/
+        background-color:#1e62d0;
     }.submit-button:active {
-            position:relative;
-            top:1px;
+        position:relative;
+        top:1px;
+    }.submit-button:focus {
+        outline: 0;
     }
 }

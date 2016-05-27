@@ -75,6 +75,8 @@ class Featured{
                         return $newmode . "_2016";
                     case "Ascension":
                         return $newmode . "_2016";
+                    case "OneForAll5x5":
+                        return $newmode . "_2016";
                 }
             }
             default: {

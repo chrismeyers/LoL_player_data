@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="../scripts/vendor/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="../simplemodal/basic/js/jquery.simplemodal.js"></script>
     </head>
 

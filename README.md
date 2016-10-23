@@ -1,9 +1,8 @@
 LoL_player_data
 ===============
 
-This is a summer project that I am working on based on the video game *League of Legends*.  
-Currently, you can enter a player name and various information about this player will be parsed and presented to you.  This information includes: summoner name, level, region, icon and a listing of all game mode stats
-that the player has earned.
+LoL_player_data is a statistics parser based on the video game *League of Legends*.  
+Upon entering a player name and specifying a region, various information about the player will be parsed and presented to you.  This information includes: summoner name, level, region, icon and a listing of all game mode stats that the player has earned.
 
 [Click here for a demo](http://chrismeyers.info/projects/LoL_player_data/web/main.php?name=Moshi&region=na)
 
@@ -23,3 +22,5 @@ that the player has earned.
 ##Legal
 
 LoL_player_data isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing *League of Legends*. *League of Legends* and Riot Games are trademarks or registered trademarks of Riot Games, Inc. *League of Legends* © Riot Games, Inc.
+
+LoL_player_data uses [SimpleModal](https://github.com/ericmmartin/simplemodal) to display informational windows.

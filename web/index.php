@@ -8,13 +8,13 @@
         
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
         
-        <link rel="stylesheet" href="custom.css">
-        <link rel="stylesheet" href="custom-small.css">
-        <link rel="stylesheet" href="../simplemodal/basic/css/basic.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="../simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="css/custom-small.css">
+        <link rel="stylesheet" href="../scripts/vendor/simplemodal/basic/css/basic.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="../scripts/vendor/simplemodal/basic/css/basic_ie.css" type="text/css" media="screen" />
 
         <script type="text/javascript" src="../scripts/vendor/jquery-2.2.4.min.js"></script>
-        <script type="text/javascript" src="../simplemodal/basic/js/jquery.simplemodal.js"></script>
+        <script type="text/javascript" src="../scripts/vendor/simplemodal/basic/js/jquery.simplemodal.js"></script>
         
     </head>
 

@@ -57,7 +57,8 @@ class Translations{
         "Ascension_2016"              => "Ascension 2016",
         "KingPoro"                    => "Legend of the Poro King",
         "CounterPick"                 => "Nemesis Draft",
-        "Bilgewater"                  => "Black Market Brawlers"
+        "Bilgewater"                  => "Black Market Brawlers",
+        "Siege"                       => "Nexus Siege"
     );
     
     private $gameModeNamesRecent = array(

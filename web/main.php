@@ -26,7 +26,7 @@
                         <?php 
                         echo $userName . " <br /> Level: " .$summLvl;
                         echo " <br /> ";
-                        echo $lolapi->translateRegion($regionurl);
+                        echo $lolapi->translateRegion();
                         ?> 
                     </h1>
                 </div>
@@ -76,9 +76,9 @@
             
             ?></div>
             
-            <?php          
-            // Recent Matches - Slows down site due to API throttling.
-            /*
+            <?php
+            /* // Recent Matches 
+            // !!!!! Slows down site due to API throttling. !!!!!
             for($match = 0; $match < 10; $match++){
                 echo ${'recentMatch'.$match}["champName"] . " - " . $translator->translateModeRecent(${'recentMatch'.$match}["mode"])
                     . " - " . $translator->translateTeam(${'recentMatch'.$match}["team"])

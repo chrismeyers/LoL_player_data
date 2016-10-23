@@ -9,17 +9,12 @@ $translator = new Translations();
 $lolapi = new lolapi();
 $featured = new Featured();
 
-//=========Determine region=========
-$regionurl = $_GET['region'];
-
-//=========Core url data=========
-$baseurl = $lolapi->buildBaseUrl($regionurl);
-$summonerdataurl = $lolapi->getSummonerDataUrl();
+$lolapi->setCurrentRegion($_GET['region']);
 $apikey = $lolapi->buildApiKeyUrl();
 
 //=========Parsing user data=========
 $summoner = $lolapi->getSummoner(($_GET['name']));
-$jsonSumm = $lolapi->getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey);
+$jsonSumm = $lolapi->getSummonerData($summoner, $apikey);
 
 //HTTP Error handling.
 if(in_array($jsonSumm, $lolapi->possibleErrors())){ 
@@ -28,6 +23,7 @@ if(in_array($jsonSumm, $lolapi->possibleErrors())){
 }
 
 $summArr = $lolapi->jsonToArray($jsonSumm);
+$lolapi->setSummonerArray($summArr);
 
 //Returned json and converted array
 if($DEBUG_FLAG){
@@ -35,10 +31,10 @@ if($DEBUG_FLAG){
 }
 
 //Save user data to vars
-$currentSummId = $lolapi->getSummonerId($summArr, $summoner);
-$userName = $lolapi->getFormattedName($summArr, $summoner);
-$summLvl = $lolapi->getSummonerLevel($summArr, $summoner);
-$currentSummAvatar = $lolapi->buildAvatarUrl($regionurl, $summoner);
+$currentSummId = $lolapi->getSummonerId($summoner);
+$userName = $lolapi->getFormattedName($summoner);
+$summLvl = $lolapi->getSummonerLevel($summoner);
+$currentSummAvatar = $lolapi->buildAvatarUrl($summoner);
 
 
 //=========Current player stat summary=========
@@ -49,7 +45,7 @@ $statsFound = FALSE;
 for($s = 0; $s < sizeof($seasons); $s++){
     $season = $seasons[$s];
 
-    $currentjsonStatSummary = $lolapi->getStatSummary($baseurl, $currentSummId, $apikey, $season);
+    $currentjsonStatSummary = $lolapi->getStatSummary($currentSummId, $apikey, $season);
     $currentNormStatsArr = $lolapi->jsonToArray($currentjsonStatSummary);
     
     $currentSeasonNumGameModes = sizeof($currentNormStatsArr["playerStatSummaries"]);
@@ -90,33 +86,31 @@ if($DEBUG_FLAG){
 
 /*
 //=========Current player recent games=========
-//Slows down site due to API throttling.
-$recentGamesUrl = $lolapi->getRecentGames($baseurl, $currentSummId, $apikey);
+// !!!!! Slows down site due to API throttling. !!!!!
+$recentGamesUrl = $lolapi->getRecentGames($currentSummId, $apikey);
 $objRecentGamesArr = $lolapi->jsonToArray($recentGamesUrl);
 
 //Returned recent games json and converted array
 if($DEBUG_FLAG){
-    //echo $recentGamesUrl;
     $lolapi->varDump($objRecentGamesArr);
 } 
 
 for($i = 0; $i < 10; $i++){
     ${'recentMatch' . $i} = array();
     $currentChampId = $objRecentGamesArr["games"][$i]["championId"];
-    $staticChampData = $lolapi->getChampionData($regionurl, $currentChampId, $apikey);
+    $staticChampData = $lolapi->getChampionData($currentChampId, $apikey);
     $objStaticChampArr = $lolapi->jsonToArray($staticChampData);
 
     //Returned recent games json and converted array
     if($DEBUG_FLAG){
-        //echo $recentGamesUrl;
         $lolapi->varDump($objStaticChampArr);
     }
      
     ${'recentMatch' . $i}["champName"] = $objStaticChampArr["name"];
     ${'recentMatch' . $i}["mode"] = $objRecentGamesArr["games"][$i]["subType"]; //needs to be translated
     ${'recentMatch' . $i}["team"] = $objRecentGamesArr["games"][$i]["teamId"]; //needs to be translated
-    ${'recentMatch' . $i}["spell1"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell1"], $apikey);
-    ${'recentMatch' . $i}["spell2"] = $lolapi->getSpellName($regionurl, $objRecentGamesArr["games"][$i]["spell2"], $apikey);
+    ${'recentMatch' . $i}["spell1"] = $lolapi->getSpellName($objRecentGamesArr["games"][$i]["spell1"], $apikey);
+    ${'recentMatch' . $i}["spell2"] = $lolapi->getSpellName($objRecentGamesArr["games"][$i]["spell2"], $apikey);
 }
 */
 ?>

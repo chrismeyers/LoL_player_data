@@ -11,22 +11,24 @@ class lolapi{
     private $summarystatsurl = "/summary/";
     private $rankedstatsurl = "/ranked/";
     private $apikeytext = "?api_key=";
+    private $currentRegion = NULL;
+    private $summonerArray = NULL;
     
     //=========Background player data=========
-    public function buildBaseUrl($region){
-        return "https://" . $region . ".api.pvp.net/api/lol/" . $region;
+    public function buildBaseUrl(){
+        return "https://" . $this->currentRegion . ".api.pvp.net/api/lol/" . $this->currentRegion;
     }
     
-    public function buildStaticBaseUrl($region){
-        return "https://" . $region . ".api.pvp.net/api/lol";
+    public function buildStaticBaseUrl(){
+        return "https://" . $this->currentRegion  . ".api.pvp.net/api/lol";
     }
     
     public function buildApiKeyUrl(){
         return $this->apikeytext . file_get_contents('../notes/key.txt');
     }
 
-    public function translateRegion($region){
-        switch($region){
+    public function translateRegion(){
+        switch($this->currentRegion){
           case "na":
               return "North America";
           case "euw":
@@ -51,10 +53,26 @@ class lolapi{
               return "Somewhere on earth, maybe.";
         }
     }
+
+    public function setCurrentRegion($region){
+        $this->currentRegion = $region;
+    }
+
+    public function getCurrentRegion(){
+        return $this->currentRegion;
+    }
+
+    public function setSummonerArray($summArr){
+        $this->summonerArray = $summArr;
+    }
+
+    public function getSummonerArray(){
+        return $this->summonerArray;
+    }
     
     //=========Current player data=========
-    public function buildAvatarUrl($region, $name){
-        return "http://avatar.leagueoflegends.com/" . $region . "/" . $name .".png";
+    public function buildAvatarUrl($name){
+        return "http://avatar.leagueoflegends.com/" . $this->currentRegion . "/" . $name .".png";
     }
     
     public function getSummonerDataUrl(){
@@ -89,25 +107,25 @@ class lolapi{
         return str_replace(' ', '', strtolower($name));
     }
     
-    public function getSummonerId($summonerArray, $name){
-        return $summonerArray[$name]["id"];
+    public function getSummonerId($name){
+        return $this->summonerArray[$name]["id"];
     }
     
-    public function getFormattedName($summonerArray, $name){
-        return $summonerArray[lcfirst($name)]["name"];
+    public function getFormattedName($name){
+        return $this->summonerArray[lcfirst($name)]["name"];
     }
 
-    public function getSummonerLevel($summonerArray, $name){
-        return $summonerArray[lcfirst($name)]["summonerLevel"];
+    public function getSummonerLevel($name){
+        return $this->summonerArray[lcfirst($name)]["summonerLevel"];
     }
     
     /*
      * Returns Summoner data JSON if name is valid.  Otherwise, an error code
      * corresponding to the HTTP response is returned.
      */
-    public function getSummonerData($baseurl, $summonerdataurl, $summoner, $apikey){
-        $jsonSumm = @file_get_contents($baseurl 
-                                       . $summonerdataurl 
+    public function getSummonerData($summoner, $apikey){
+        $jsonSumm = @file_get_contents($this->buildBaseUrl()
+                                       . $this->summonerdataurl
                                        . $summoner 
                                        . $apikey);  //summoner query
         
@@ -122,29 +140,30 @@ class lolapi{
     }
     
     //=========Stat summary=========
-    public function getStatSummary($baseurl, $currentSummId, $apikey, $season){ 
-        return @file_get_contents($baseurl . $this->statsurl 
-                                           . $currentSummId 
-                                           . $this->summarystatsurl 
-                                           . $apikey 
-                                           . "&season=" . $season); 
+    public function getStatSummary($currentSummId, $apikey, $season){ 
+        return @file_get_contents($this->buildBaseUrl()
+                                  . $this->statsurl 
+                                  . $currentSummId 
+                                  . $this->summarystatsurl 
+                                  . $apikey 
+                                  . "&season=" . $season); 
     }
     
     //=========Static Data=========
         //Does NOT count towards query limit
-    public function getChampionData($region, $champId, $apikey){
-        return @file_get_contents($this->buildStaticBaseUrl($region)  
+    public function getChampionData($champId, $apikey){
+        return @file_get_contents($this->buildStaticBaseUrl()  
                                   . $this->staticdataurl 
-                                  . $region
+                                  . $this->currentRegion
                                   . $this->championdataurl
                                   . $champId 
                                   . $apikey); 
     }
     
-    public function getSpellName($region, $id, $apikey){
-        $spellJson = @file_get_contents($this->buildStaticBaseUrl($region) 
+    public function getSpellName($id, $apikey){
+        $spellJson = @file_get_contents($this->buildStaticBaseUrl() 
                                         . $this->staticdataurl
-                                        . $region 
+                                        . $this->currentRegion 
                                         . $this->spellsurl 
                                         . $id 
                                         . $apikey);
@@ -154,8 +173,8 @@ class lolapi{
     }
     
     //=========Recent games=========
-    public function getRecentGames($baseurl, $currentSummId, $apikey){
-        return @file_get_contents($baseurl 
+    public function getRecentGames($currentSummId, $apikey){
+        return @file_get_contents($this->buildBaseUrl()
                                   . $this->gameurl
                                   . $currentSummId
                                   . $this->recenturl 
@@ -174,32 +193,16 @@ class lolapi{
     
     public function error($errorResponse){
         $error_str = explode(' ', $errorResponse[0]);
-        $code = NULL;
         // $error_str[0] = "HTTP/1.1"
         // $error_str[1] = ERROR_CODE
         // $error_str[2..n-1] = ERROR_MSG words 
 
-        switch($error_str[1]){
-            case(400):
-                $code = 400;
-                break;
-            case(401):
-                $code = 401;
-                break;
-            case(404):
-                $code = 404;
-                break;
-            case(429):
-                $code = 429;
-                break;
-            case(500):
-                $code = 500;
-                break;
-            case(503):
-                $code = 503;
-                break;
+        if(in_array($error_str[1], $this->possibleErrors())){
+            return $error_str[1];
         }
-        return $code;
+        else{
+            return NULL;
+        }
     }
     
     //=============DEBUG==============

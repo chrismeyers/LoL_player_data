@@ -6,7 +6,8 @@ class Featured{
         "OneForAll5x5", "FirstBlood1x1", "FirstBlood2x2", "Bilgewater");
 
     private $dupeFeaturedModes = array(
-        "OneForAll5x5", "URF", "URFBots", "Hexakill", "Ascension");
+        "OneForAll5x5", "URF", "URFBots", "Hexakill", "Ascension",
+        "NightmareBot");
 
     private $rankedModes = array(
         "RankedPremade3x3", "RankedPremade5x5", "RankedSolo5x5",
@@ -53,6 +54,8 @@ class Featured{
                         return $newmode . "_TT_Original";
                     case "Ascension":
                         return $newmode . "_Original";
+                    case "NightmareBot":
+                        return $newmode . "_Original";
                 }
             }
             case "SEASON2015": {
@@ -77,6 +80,8 @@ class Featured{
                         return $newmode . "_2016";
                     case "OneForAll5x5":
                         return $newmode . "_2016";
+                    case "NightmareBot":
+                        return $newmode . "_Teemo";
                 }
             }
             default: {

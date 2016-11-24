@@ -9,6 +9,9 @@ class Translations{
         "Unranked3x3"                 => "Normal 3v3",        
         "OdinUnranked"                => "Dominion",
 
+        "RankedFlexSR"                => "Ranked Flex Summoner's Rift",
+        "RankedFlexTT"                => "Ranked Flex Twisted Treeline",
+
         "RankedPremade3x3_SEASON3"    => "Ranked Premade 3v3" . " Season 3",
         "RankedPremade5x5_SEASON3"    => "Ranked Premade 5v5" . " Season 3",
         "RankedSolo5x5_SEASON3"       => "Ranked Solo/Duo"    . " Season 3",

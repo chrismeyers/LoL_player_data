@@ -52,8 +52,13 @@
                     echo "<div class='mode'>" . $currentMode["playerStatSummaryType"] . "</div>";
                     echo "<tr class='stats'>" . 
                          "<td class='stat-name-half'>Wins</td>" .
-                         "<td class='stat-value-half'>" . $currentMode["wins"] .
-                         "</td></tr>";
+                         "<td class='stat-value-half'>" . $currentMode["wins"] . "</td></tr>";
+                         
+                    if(array_key_exists("losses", $currentMode)) {
+                        echo "<tr class='stats'>" .
+                             "<td class='stat-name-half'>Losses</td>" . 
+                             "<td class='stat-value-half'>" . $currentMode["losses"] . "</td></tr>";
+                    }
 
                     $currentStatArray = $currentMode["aggregatedStats"];
                     foreach($currentStatArray as $currentStat){

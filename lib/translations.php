@@ -9,9 +9,6 @@ class Translations{
         "Unranked3x3"                 => "Normal 3v3",        
         "OdinUnranked"                => "Dominion",
 
-        "RankedFlexSR"                => "Ranked Flex Summoner's Rift",
-        "RankedFlexTT"                => "Ranked Flex Twisted Treeline",
-
         "RankedPremade3x3_SEASON3"    => "Ranked Premade 3v3" . " Season 3",
         "RankedPremade5x5_SEASON3"    => "Ranked Premade 5v5" . " Season 3",
         "RankedSolo5x5_SEASON3"       => "Ranked Solo/Duo"    . " Season 3",
@@ -35,6 +32,16 @@ class Translations{
         "RankedSolo5x5_SEASON2016"    => "Ranked Solo/Duo"    . " Season 6",
         "RankedTeam3x3_SEASON2016"    => "Ranked Teams 3v3"   . " Season 6",
         "RankedTeam5x5_SEASON2016"    => "Ranked Teams 5v5"   . " Season 6",
+        "RankedFlexSR_SEASON2016"     => "Ranked Flex Summoner's Rift" . " Season 6",
+        "RankedFlexTT_SEASON2016"     => "Ranked Flex Twisted Treeline" . "Season 6",
+
+        "RankedPremade3x3_SEASON2017" => "Ranked Premade 3v3" . " Season 7",
+        "RankedPremade5x5_SEASON2017" => "Ranked Premade 5v5" . " Season 7",
+        "RankedSolo5x5_SEASON2017"    => "Ranked Solo/Duo"    . " Season 7",
+        "RankedTeam3x3_SEASON2017"    => "Ranked Teams 3v3"   . " Season 7",
+        "RankedTeam5x5_SEASON2017"    => "Ranked Teams 5v5"   . " Season 7",
+        "RankedFlexSR_SEASON2017"     => "Ranked Flex Summoner's Rift" . " Season 7",
+        "RankedFlexTT_SEASON2017"     => "Ranked Flex Twisted Treeline" . "Season 7",
 
         "OneForAll5x5_Original"       => "One for All Original",
         "OneForAll5x5_Mirror"         => "One for All Mirror",
@@ -54,14 +61,18 @@ class Translations{
         "URFBots_2015"                => "Ultra Rapid Fire (URF) Bots 2015",
         "URF_2016"                    => "Ultra Rapid Fire (URF) 2016",
         "URFBots_2016"                => "Ultra Rapid Fire (URF) Bots 2016",
+        "URF_2017"                    => "Ultra Rapid Fire (URF) 2017",
+        "URFBots_2017"                => "Ultra Rapid Fire (URF) Bots 2017",
         "NightmareBot_Original"       => "Doom Bots of Doom",
         "NightmareBot_Teemo"          => "The Teemoing/The Gauntlet",
         "Ascension_Original"          => "Ascension",
         "Ascension_2016"              => "Ascension 2016",
-        "KingPoro"                    => "Legend of the Poro King",
+        "KingPoro_Original"           => "Legend of the Poro King Original",
+        "KingPoro_2017"               => "Legend of the Poro King 2017",
         "CounterPick"                 => "Nemesis Draft",
         "Bilgewater"                  => "Black Market Brawlers",
-        "Siege"                       => "Nexus Siege"
+        "Siege"                       => "Nexus Siege",
+        "Assassinate"                 => "Hunt of the Blood Moon"
     );
     
     private $gameModeNamesRecent = array(
@@ -93,7 +104,8 @@ class Translations{
         "SEASON3"    => "Season 3",
         "SEASON2014" => "Season 4",
         "SEASON2015" => "Season 5",
-        "SEASON2016" => "Season 6"
+        "SEASON2016" => "Season 6",
+        "SEASON2017" => "Season 7"
     );
     
     function translateModeSummary($rawMode){

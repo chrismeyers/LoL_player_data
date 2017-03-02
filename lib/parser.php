@@ -55,17 +55,14 @@ for($s = 0; $s < sizeof($seasons); $s++){
         $newMode = $currentNormStatsArr["playerStatSummaries"][$i]["playerStatSummaryType"];
         $found = FALSE;
 
-        //The following modes appeared in multiple seasons and require a suffix
-        //to remove ambiguity.
-        //  - OneForAll5x5, URF, URFBots, Hexakill, Ascension    
+        // Several modes appear in multiple seasons and require a suffix
+        // to remove ambiguity.
         if(in_array($newMode, $featured->getDupeFeaturedModesArr())) {
             $newMode = $featured->filterDupeFeaturedModes($newMode, $season);
             $found = TRUE;
         }
 
-        //The following modes are ranked and should be stored separately by SEASON.
-        //  - RankedPremade3x3, RankedPremade5x5, RankedSolo5x5,
-        //    RankedTeam3x3, RankedTeam5x5
+        // Ranked modes should be stored separately by SEASON.
         if(in_array($newMode, $featured->getRankedModesArr())) {
             $newMode = $featured->filterRankedModes($newMode, $season);
             $found = TRUE;

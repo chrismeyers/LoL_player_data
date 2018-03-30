@@ -15,7 +15,7 @@ Upon entering a player name and specifying a region, various information about t
 3. Enter your api key into the 'key.txt' file (key can be found at https://developer.riotgames.com/)
    * Make sure there are no spaces before, after, or in the 'key.txt' file.
 5. Use the form in **web/index.php** to search for a player.
-4. Alternatively, '**web/main.php'** can be invoked directly by appending a few url paramters:
+4. Alternatively, '**web/main.php'** can be invoked directly by appending a few url parameters:
    * EX: `/web/main.php?name=SUMMONER_NAME_HERE&region=REGION_HERE`
      * Summoner name with spaces: use either **+** or **%20** to separate words or **omit spaces**.
      * Valid regions = {BR, EUNE, EUW, KR, LAN, LAS, NA, OCE, RU, TR}.  Case insensitive.

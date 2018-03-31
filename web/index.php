@@ -21,7 +21,7 @@
     <body>
         <div style="color: red; margin-bottom: 10px;">
         ATTENTION: Due to the deprecation of the stats-v1.3 API endpoint, this web application is no longer pulling
-        live data from the League of Legends API. This page was created for historical purposes to capture the final
+        live data from the League of Legends API. Please see <a href="static.html">this page</a> for a look at the
         state of the application before API services went offline.
         </div>
         <div id="namebox">

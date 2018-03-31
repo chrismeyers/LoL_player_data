@@ -19,6 +19,11 @@
     </head>
 
     <body>
+        <div style="color: red; margin-bottom: 10px;">
+        ATTENTION: Due to the deprecation of the stats-v1.3 API endpoint, this web application is no longer pulling
+        live data from the League of Legends API. This page was created for historical purposes to capture the final
+        state of the application before API services went offline.
+        </div>
         <div id="main">
             <div class="summoner">
                 <div class="summoner-info">
